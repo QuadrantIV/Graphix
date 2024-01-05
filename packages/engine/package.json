@@ -1,7 +1,7 @@
 {
   "name": "graphix-engine",
   "author": "yangling",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Graphix Engine",
   "main": "lib/index.js",
   "module": "es/index.js",
