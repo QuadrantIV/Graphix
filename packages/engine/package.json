@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest -c jest.config.js",
     "build": "build-scripts build --skipDemo",
-    "prepublishOnly": "tnpm run build"
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "events": "^3.3.0"
