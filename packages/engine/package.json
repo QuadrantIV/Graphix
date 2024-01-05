@@ -1,7 +1,7 @@
 {
   "name": "graphix-engine",
   "author": "yangling",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Graphix Engine",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -15,9 +15,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "graphix-model": "^1.0.0",
-    "graphix-skeleton": "^1.0.0",
-    "events": "^3.3.0"
+    "events": "^3.3.0",
+    "graphix-model": "^1.0.4",
+    "graphix-skeleton": "^1.0.4"
   },
   "license": "MIT",
   "gitHead": "0d50deeb37a2c515cee9901bd5b8fbe8782d035a",
