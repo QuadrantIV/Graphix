@@ -15,6 +15,8 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "graphix-model": "^1.0.0",
+    "graphix-skeleton": "^1.0.0",
     "events": "^3.3.0"
   },
   "license": "MIT",
