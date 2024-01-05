@@ -1,0 +1,13 @@
+{
+  "entry": {
+    "index": "./src/"
+  },
+  "externals": {
+    "react": "var window.React",
+    "react-dom": "var window.ReactDOM"
+  },
+  "plugins": [
+    "build-plugin-react-app",
+    "./build.plugin.js"
+  ]
+}

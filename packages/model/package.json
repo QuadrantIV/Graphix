@@ -1,0 +1,19 @@
+{
+  "name": "graphix-model",
+  "author": "yangling",
+  "version": "1.0.0",
+  "description": "Graphix Model",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "scripts": {
+    "test": "jest -c jest.config.js",
+    "build": "build-scripts build --skip-demo",
+    "prepublishOnly": "tnpm run build",
+    "build:watch": "build-scripts build --skip-demo --watch"
+  },
+  "license": "MIT"
+}

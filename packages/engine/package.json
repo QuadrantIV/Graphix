@@ -1,0 +1,23 @@
+{
+  "name": "graphix-engine",
+  "author": "yangling",
+  "version": "1.0.0",
+  "description": "Graphix Engine",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "scripts": {
+    "test": "jest -c jest.config.js",
+    "start": "build-scripts start --config build.dev.json",
+    "build": "build-scripts build --skip-demo",
+    "prepublishOnly": "tnpm run build",
+    "build:watch": "build-scripts build --skip-demo --watch"
+  },
+  "dependencies": {
+    "events": "^3.3.0"
+  },
+  "license": "MIT"
+}

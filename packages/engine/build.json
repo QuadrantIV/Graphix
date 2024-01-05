@@ -1,0 +1,16 @@
+{
+  "plugins": [
+    [
+      "build-plugin-component",
+      {
+        "filename": "index",
+        "library": "Graphix",
+        "libraryTarget": "umd",
+        "externals": {
+          "react": "var window.React",
+          "react-dom": "var window.ReactDOM"
+        }
+      }
+    ]
+  ]
+}

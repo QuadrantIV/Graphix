@@ -1,0 +1,32 @@
+{
+  "name": "example-bpms",
+  "private": true,
+  "version": "1.0.0",
+  "description": "example",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "es"
+  ],
+  "scripts": {
+    "test": "jest -c jest.config.js",
+    "start": "build-scripts start"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/dagre": "^0.7.48",
+    "@types/lodash": "^4.14.194"
+  },
+  "dependencies": {
+    "@antv/x6": "^2.9.7",
+    "@antv/x6-plugin-dnd": "^2.0.5",
+    "@antv/x6-react-shape": "2.0.8",
+    "@antv/x6-plugin-snapline": "^2.1.7",
+    "@alifd/next": "^1.26.37",
+    "hotkeys-js": "^3.13.3",
+    "dagre": "^0.8.5",
+    "lodash": "^4.17.21",
+    "yaml": "^2.2.1"
+  }
+}

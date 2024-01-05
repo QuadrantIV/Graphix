@@ -1,0 +1,24 @@
+# project custom
+build
+dist
+packages/*/lib/
+packages/*/es/
+packages/*/dist/
+packages/*/output/
+package-lock.json
+yarn.lock
+deploy-space/packages
+deploy-space/.env
+node_modules/
+
+# IDE
+.vscode
+.idea
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
