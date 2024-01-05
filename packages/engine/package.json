@@ -17,5 +17,7 @@
   "dependencies": {
     "events": "^3.3.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "gitHead": "3536026b56a0728dcb40c44d7939b48a76ed7e4f",
+  "repository": "git@github.com:graphix-editor/Graphix.git"
 }
