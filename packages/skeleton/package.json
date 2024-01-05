@@ -11,9 +11,9 @@
   ],
   "scripts": {
     "test": "jest -c jest.config.js",
-    "build": "build-scripts build --skip-demo",
+    "build": "build-scripts build --skipDemo",
     "prepublishOnly": "tnpm run build",
-    "build:watch": "build-scripts build --skip-demo --watch"
+    "build:watch": "build-scripts build --skipDemo --watch"
   },
   "license": "MIT"
 }

@@ -8,8 +8,8 @@
   "scripts": {
     "bootstrap": "./scripts/bootstrap.sh",
     "start": "lerna exec --scope graphix-engine -- npm start",
-    "example-bpms": "lerna exec --scope example-bpms -- npm start",
     "build": "lerna run build --stream",
+    "example-bpms": "lerna exec --scope example-bpms -- npm start",
     "pub": "lerna publish patch"
   },
   "dependencies": {

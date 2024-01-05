@@ -1,6 +1,5 @@
 import React from 'react';
 import { Area, AreaType, PaneConfig } from '../area';
-import { Document } from 'graphix-model';
 import { createContent } from '../utils';
 import { skeleton } from '../skeleton-model';
 

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Document, Node, config, workspace } from 'graphix-model';
-import { SettingsUI } from './ve-settings';
+import { Document, Node, config, workspace, utils } from 'graphix-model';
 import { Area, AreaType } from '../area';
 import { skeleton } from '../skeleton-model';
 import { createContent } from '../utils';
-import { uniqueId } from 'model/src/utils';
 
-/**
- * 右设置面板
- */
+const { uniqueId } = utils;
 const RightArea = () => {
   const [selected, setSelected] = useState<Node | null>(null);
   const doc = workspace.getDocument();

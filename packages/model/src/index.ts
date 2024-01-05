@@ -8,7 +8,7 @@ import {
   pluginRegistry
 } from './instance';
 import Workspace from './workspace';
-import Document from './document';
+import Document, { DocumentData } from './document';
 import Node, { NodeData, PropsData} from './document/node';
 import DocumentCollection from './document/collection';
 import Selection from './document/selection';
@@ -30,7 +30,7 @@ export {
 // class，type
 export {
   Workspace,
-  Document,
+  Document, DocumentData,
   DocumentCollection,
   Prototype, PrototypeConfig, Plugin, PluginConfig,
   Node, NodeData, PropsData, Setting,

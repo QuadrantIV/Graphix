@@ -1,6 +1,5 @@
-import { Prototype, PrototypeConfig, pluginRegistry, prototypeRegistry, workspace } from 'graphix-model';
+import { Prototype, PrototypeConfig, pluginRegistry, prototypeRegistry, workspace, DocumentData } from 'graphix-model';
 import { skeleton, SkeletonView } from 'graphix-skeleton';
-import { DocumentData } from 'model/src/document';
 import { createElement } from 'react';
 import { render } from 'react-dom';
 
@@ -10,7 +9,7 @@ interface InitOptions {
 }
 
 /**
- * 设计器初始化
+ * 框架初始化
  * @param container 
  */
 export async function init(options: InitOptions) {

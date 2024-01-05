@@ -11,10 +11,8 @@
   ],
   "scripts": {
     "test": "jest -c jest.config.js",
-    "start": "build-scripts start --config build.dev.json",
-    "build": "build-scripts build --skip-demo",
-    "prepublishOnly": "tnpm run build",
-    "build:watch": "build-scripts build --skip-demo --watch"
+    "build": "build-scripts build --skipDemo",
+    "prepublishOnly": "tnpm run build"
   },
   "dependencies": {
     "events": "^3.3.0"
