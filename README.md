@@ -20,7 +20,7 @@ Graphix 是一个可快速构建和扩展的图形编辑器研发框架，面向
 
 ## 🎬 Demo
 ### [Bpm 场景](./examples/bpms/)（graphix + antv x6）
-![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)]
+![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)
 
 ### 3D 场景
 todo
