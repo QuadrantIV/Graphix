@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "test": "jest -c jest.config.js",
-    "start": "build-scripts start"
+    "start": "build-scripts start",
+    "build": "build-scripts build"
   },
   "license": "MIT",
   "devDependencies": {

@@ -19,7 +19,7 @@ Graphix 是一个可快速构建和扩展的图形编辑器研发框架，面向
 | 渲染引擎       | 用于中心区域的画布渲染，常见引擎有：Dom，AntV X6/G6/G，Three.js，Pixi.js。 |
 
 ## 🎬 Demo
-### [Bpm 场景](./examples/bpms/)（graphix + antv x6）
+### [Bpm 场景](https://graphix-editor.github.io/Graphix/)（graphix + antv x6）
 ![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)
 
 ### 3D 场景
