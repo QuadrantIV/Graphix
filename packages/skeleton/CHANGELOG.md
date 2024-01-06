@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/graphix-editor/Graphix/compare/v1.0.5...v1.0.6) (2024-01-06)
+
+
+### Bug Fixes
+
+* build json disableGenerateStyle ([d561429](https://github.com/graphix-editor/Graphix/commit/d5614295ad7f516149437cf13fbd8bfd0bfa948b))
+
+
+
+
+
 ## [1.0.4](https://github.com/graphix-editor/Graphix/compare/v1.0.3...v1.0.4) (2024-01-05)
 
 **Note:** Version bump only for package graphix-skeleton
