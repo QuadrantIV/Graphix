@@ -2,12 +2,13 @@ import React from 'react';
 import { Area, AreaType, PaneConfig } from '../area';
 import { createContent } from '../utils';
 import { skeleton } from '../skeleton-model';
+import { utils } from 'graphix-model';
 
 export default class TopBar extends React.PureComponent {
   renderItem(item: PaneConfig) {
     const { content, contentProps = {} } = item;
     return (
-      <div className="graphix-skeleton-topbar-item">
+      <div key={utils.uniqueId('topbar-item')} className="graphix-skeleton-topbar-item">
         {
           createContent(content, {
             ...contentProps,
