@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import Prototype, { PrototypeConfig } from '../prototype';
-import { PluginConfig, Plugin } from '../plugin';
+import { Plugin } from '../plugin';
+import { PluginConfig } from '../types';
 
 export interface RegisterOptions {
   autoInit?: boolean;

@@ -30,6 +30,7 @@ npm install graphix-engine --save-dev
 
 ```ts
 import { init, pluginRegistry, skeleton } from 'graphix-engine';
+import 'graphix-engine/dist/index.css';
 
 pluginRegistry.register(() => ({
   name: 'brand',

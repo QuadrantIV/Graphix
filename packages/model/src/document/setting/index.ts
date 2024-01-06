@@ -2,17 +2,7 @@ import EventEmitter from 'events';
 import { uniqueId } from '../../utils';
 import Node from '../node';
 import Document from '..';
-
-export type SetterType = string | {
-  type: string;
-  props?: object;
-} | React.ComponentType<any> | React.ReactElement<any>;
-
-export interface SettingConfig {
-  key: string;
-  setter: SetterType;
-  setterProps?: object;
-}
+import { SetterType, SettingConfig } from '../../types'; 
 
 export default class Setting {
   private uid: string = uniqueId('setting');

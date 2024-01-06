@@ -1,6 +1,6 @@
 {
   "lerna": "4.0.0",
-  "version": "1.0.4",
+  "version": "1.0.7",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "packages": [
@@ -14,11 +14,8 @@
     },
     "version": {
       "allowBranch": [
-        "master",
         "main",
-        "release/*",
-        "daily/*",
-        "refactor/*"
+        "develop"
       ]
     },
     "publish": {

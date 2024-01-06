@@ -1,5 +1,5 @@
-import { Prototype, PrototypeConfig, pluginRegistry, prototypeRegistry, workspace, DocumentData } from 'graphix-model';
-import { skeleton, SkeletonView } from 'graphix-skeleton';
+import { pluginRegistry, workspace, DocumentData } from 'graphix-model';
+import { SkeletonView } from 'graphix-skeleton';
 import { createElement } from 'react';
 import { render } from 'react-dom';
 

@@ -6,6 +6,7 @@
     "react": "var window.React",
     "react-dom": "var window.ReactDOM"
   },
+  "disableGenerateStyle": true,
   "plugins": [
     "build-plugin-component",
     "./build.plugin.js"

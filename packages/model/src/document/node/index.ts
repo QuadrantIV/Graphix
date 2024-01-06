@@ -5,16 +5,7 @@ import Settings from '../setting';
 import { hasOwn, uniqueId } from '../../utils';
 import Document from '..';
 import Setting from '../setting';
-
-export interface PropsData {
-  [propName: string]: any;
-}
-export interface NodeData {
-  id?: string;
-  type: string;
-  props?: PropsData;
-  [key: string]: any;
-}
+import { PropsData, NodeData } from '../../types';
 
 export default class Node {
   private emitter: EventEmitter = new EventEmitter();
