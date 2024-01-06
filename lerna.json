@@ -14,11 +14,8 @@
     },
     "version": {
       "allowBranch": [
-        "master",
         "main",
-        "release/*",
-        "daily/*",
-        "refactor/*"
+        "develop"
       ]
     },
     "publish": {
