@@ -1,6 +1,7 @@
 import { config } from './instance';
-import Document, { DocumentData } from './document';
+import Document from './document';
 import DocumentCollection, { DocumentCollectionData } from './document/collection';
+import { DocumentData } from './types';
 
 export default class Workspace {
   private document: Document;

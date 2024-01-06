@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
-import Prototype, { PrototypeConfig } from '../prototype';
+import Prototype from '../prototype';
+import { PrototypeConfig } from '../types';
 
 interface TypedMaps {
   [typeName: string]: Prototype;

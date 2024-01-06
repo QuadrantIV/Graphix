@@ -1,5 +1,5 @@
-import { Plugin, PluginConfig } from './plugin';
-import Prototype, { PrototypeConfig } from './prototype';
+import { Plugin } from './plugin';
+import Prototype from './prototype';
 import * as utils from './utils';
 import {
   config,
@@ -8,8 +8,8 @@ import {
   pluginRegistry
 } from './instance';
 import Workspace from './workspace';
-import Document, { DocumentData } from './document';
-import Node, { NodeData, PropsData} from './document/node';
+import Document from './document';
+import Node from './document/node';
 import DocumentCollection from './document/collection';
 import Selection from './document/selection';
 import Timeline from './document/timeline';
@@ -30,9 +30,11 @@ export {
 // class，type
 export {
   Workspace,
-  Document, DocumentData,
+  Document,
   DocumentCollection,
-  Prototype, PrototypeConfig, Plugin, PluginConfig,
-  Node, NodeData, PropsData, Setting,
+  Prototype, Plugin,
+  Node, Setting,
   Selection, Timeline
 };
+
+export * from './types';

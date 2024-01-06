@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import Document, { DocumentData } from './index';
-import { SettingConfig } from './setting';
+import Document from './index';
+import { DocumentData, SettingConfig } from '../types';
 
 export interface DocumentCollectionData {
   documents: DocumentData[];

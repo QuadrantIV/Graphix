@@ -1,21 +1,4 @@
-export interface PluginConfig {
-  /**
-   * 插件名称
-   */
-  name: string;
-  /**
-   *  插件初始化
-   */
-  init?(): void;
-  /**
-   * 插件销毁
-   */
-  destroy?(): void;
-  /**
-   * 插件导出
-   */
-  exports?(): any;
-}
+import { PluginConfig } from "../types";
 
 /**
  * 设计器插件

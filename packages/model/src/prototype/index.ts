@@ -1,33 +1,4 @@
-import { SettingConfig } from '../document/setting';
-
-export type View = React.ComponentType<any> | object;
-
-export interface PropConfig {
-  [key: string]: any;
-}
-
-export interface PrototypeConfig {
-  /**
-   * 组件类型名，用于注册
-   */
-  type: string;
-  /**
-   * 组件视图
-   */
-  view: View;
-  /**
-   * 组件参数枚举
-   */
-  props?: PropConfig;
-  /**
-   * 组件设置枚举
-   */
-  settings?: Array<SettingConfig>;
-  /**
-   * 其它扩展配置信息
-   */
-  [extraKey: string]: any;
-}
+import { PropConfig, PrototypeConfig, SettingConfig, View } from '../types';
 
 export default class Prototype {
   private type: string;

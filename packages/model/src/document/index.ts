@@ -1,19 +1,11 @@
 import { EventEmitter } from 'events';
 import Setting from './setting';
-import { SettingConfig } from './setting';
 import { uniqueId } from '../utils';
 import Selection from './selection';
 import Timeline from './timeline';
-import Node, { NodeData, PropsData } from './node';
+import Node from './node';
+import { DocumentData, PropsData, NodeData, SettingConfig } from '../types';
 
-export interface DocumentData {
-  id?: string;
-  documentType?: string;
-  documentVersion?: string;
-  nodes?: NodeData[];
-  props?: PropsData;
-  [key: string]: any;
-}
 interface NodeMap {
   [uid: string]: Node | null;
 }
@@ -126,7 +118,7 @@ export default class Document {
   }
 
   applyTimelinePointData(data: DocumentData): void {
-    const { props, nodes } = data;
+    const { props, nodes = [] } = data;
     this.propsData = props || {};
 
     const originNodes = this.nodes.slice();
