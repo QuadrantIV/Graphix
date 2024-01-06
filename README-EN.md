@@ -18,7 +18,7 @@ Graphix is a rapidly constructible and extensible graphical editor development f
 | Rendering Engine  | Used for canvas rendering in the central area, common engines include: Dom, AntV X6/G6/G, Three.js, Pixi.js. |
 
 ## 🎬 Demo
-### [BPM Scenario](./examples/bpms/) (graphix + antv x6)
+### [BPM Scenario](https://graphix-editor.github.io/Graphix/) (graphix + antv x6)
 [![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)](./examples/bpms/)
 ### 3D Scenario
 todo
