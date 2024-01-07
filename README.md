@@ -1,8 +1,17 @@
-# Graphix
+<h1 align="center">Graphix</h1>
 
-Graphix 是一个可快速构建和扩展图形编辑器的研发框架，提供一套通用的编辑器模型和骨架视图。可以轻松通过扩展 Plugin 和 Prototype（编辑器组件） 来组合生成任意图形编辑器。
+<div align="center">
+一个可快速构建和扩展图形编辑器的研发框架，提供一套通用的编辑器模型和骨架视图。可以轻松通过扩展 Plugin 和 Prototype（编辑器组件） 来组合生成任意图形编辑器。
+</div>
+<br />
+<div align="center">
 
-简体中文 | [English](./README-EN.md)
+  简体中文 | [English](./README-EN.md)
+
+  <div style="display: flex; align-items: center;">
+    如果觉得 Graphix 对您有帮助的话，请帮忙右上角点个 ⭐ Star 和 Fork，您的支持是 Graphix 变得更好最大的动力。
+  </div>
+</div>
 
 ## ✨ 特性
 
