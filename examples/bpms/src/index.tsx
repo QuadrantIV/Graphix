@@ -23,22 +23,23 @@ import InputSetter from './component/setter/input-setter';
     prototypeRegistry.register(comp);
   });
 
-  // 注册全局 setter
-  config.setDocSettings([
-    {
-      key: 'variables',
-      setter: InputSetter,
-      setterProps: {
-        title: '全局变量',
-      },
-    },
-  ]);
-
   // 注册插件
   pluginRegistry.register(TopbarPlugin);
   pluginRegistry.register(Toolbar);
   pluginRegistry.register(Designer);
+
+  // 启动
   init({
     schema: DemoSchema,
+    // 全局属性
+    globalSettings: [
+      {
+        key: 'variables',
+        setter: InputSetter,
+        setterProps: {
+          title: '全局变量',
+        },
+      },
+    ]
   });
 })();

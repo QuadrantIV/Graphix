@@ -1,4 +1,4 @@
-import { pluginRegistry, workspace, DocumentData } from 'graphix-model';
+import { pluginRegistry, workspace, DocumentData, SettingConfig } from 'graphix-model';
 import { SkeletonView } from 'graphix-skeleton';
 import { createElement } from 'react';
 import { render } from 'react-dom';
@@ -6,6 +6,7 @@ import { render } from 'react-dom';
 interface InitOptions {
   container?: Element;
   schema: DocumentData;
+  globalSettings?: SettingConfig[];
 }
 
 /**
@@ -13,7 +14,7 @@ interface InitOptions {
  * @param container 
  */
 export async function init(options: InitOptions) {
-  const { container, schema } = options;
+  const { container, schema, globalSettings = [] } = options;
   let engineContainer = container;
   if (!engineContainer) {
     engineContainer = document.createElement('div');
@@ -22,7 +23,7 @@ export async function init(options: InitOptions) {
   engineContainer.id = 'graphix-engine';
 
   // init document
-  workspace.initDocument(schema);
+  workspace.initDocument(schema, globalSettings);
 
   // init plugins
   for(const plugin of pluginRegistry.getRegistry()) {
