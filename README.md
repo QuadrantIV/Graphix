@@ -1,7 +1,7 @@
 <h1 align="center">Graphix</h1>
 
 <div align="center">
-一个可快速构建和扩展图形编辑器的研发框架，提供一套通用的编辑器模型和骨架视图。可以轻松通过扩展 Plugin 和 Prototype（编辑器组件） 来组合生成任意图形编辑器。
+一个可快速构建和扩展图形编辑器的研发框架，提供一套通用的编辑器模型和骨架视图，可以轻松通过扩展 Plugin 和 Prototype（编辑器组件） 来组合生成任意图形编辑器。
 </div>
 <br />
 <div align="center">
@@ -20,7 +20,7 @@
 - 🔌 简洁易用的 API 设计。
 
 ## 🔍 名词解释
-| 名词         | 术语                                                       |
+| 名词         | 说明                                                       |
 | ------------ | ---------------------------------------------------------- |
 | 骨架（Skeleton） | Topbar，Toolbar，MainArea, LeftArea，RightArea ![](https://img.alicdn.com/imgextra/i2/O1CN019QcFzr1GdSNRsXzXC_!!6000000000645-2-tps-3584-1854.png)                |
 | 插件（Plugin）   | 通常用于扩展编辑器各面板展示                                       |
