@@ -1,4 +1,6 @@
-import { SetterComponentType } from '../document/setting';
+import React from "react";
+
+type SetterComponentType = React.ComponentType<any>;
 
 interface TypedMaps {
   [typeName: string]: SetterComponentType;
