@@ -1,27 +1,27 @@
 import { config } from './instance';
 import Document from './document';
 import DocumentCollection, { DocumentCollectionData } from './document/collection';
-import { DocumentData } from './types';
+import { DocumentData, SettingConfig } from './types';
 
 export default class Workspace {
   private document: Document;
   private documentCollection: DocumentCollection;
 
-  initDocument(data: DocumentData): Document {
+  initDocument(data: DocumentData, settingsConfig: Array<SettingConfig> = []): Document {
     if (this.document) {
       return this.document;
     }
 
-    this.document = new Document(data, config.getDocSettings());
+    this.document = new Document(data, settingsConfig);
     return this.document;
   }
 
-  initDocumentCollection(data: DocumentCollectionData): DocumentCollection {
+  initDocumentCollection(data: DocumentCollectionData, settingsConfig: Array<SettingConfig> = []): DocumentCollection {
     if (this.documentCollection) {
       return this.documentCollection;
     }
 
-    this.documentCollection = new DocumentCollection(data, config.getDocSettings());
+    this.documentCollection = new DocumentCollection(data, settingsConfig);
     return this.documentCollection;
   }
 

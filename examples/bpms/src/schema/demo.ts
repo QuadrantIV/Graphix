@@ -3,7 +3,7 @@ export const DemoSchema = {
   documentType: 'bpms',
   documentVersion: '1.0.0',
   props: {
-    variables: {},
+    variables: '{}',
   },
   nodes: [
     {

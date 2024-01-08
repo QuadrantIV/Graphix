@@ -2,7 +2,6 @@ import { Plugin } from './plugin';
 import Prototype from './prototype';
 import * as utils from './utils';
 import {
-  config,
   prototypeRegistry,
   setterRegistry,
   pluginRegistry
@@ -20,7 +19,6 @@ const workspace = new Workspace();
 // instrance
 export {
   workspace,
-  config,
   prototypeRegistry,
   setterRegistry,
   pluginRegistry,
