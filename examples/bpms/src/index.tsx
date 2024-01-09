@@ -1,4 +1,4 @@
-import { init, config, pluginRegistry, prototypeRegistry, skeleton, AreaType } from 'graphix-engine';
+import { init, pluginRegistry, prototypeRegistry, skeleton, AreaType, workspace } from 'graphix-engine';
 import { DemoSchema } from './schema/demo';
 import {
   StartEvent,

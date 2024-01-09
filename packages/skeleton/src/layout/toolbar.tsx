@@ -1,11 +1,23 @@
-import React, { createElement } from 'react';
-import { Area, AreaType, PaneConfig } from '../area';
+import React, { createElement, useEffect, useState } from 'react';
+import { Area, AreaType, PanelConfig } from '../area';
 import { utils } from 'graphix-model';
 import { createContent } from '../utils';
 import { skeleton } from '../skeleton-model';
 
-export default class Toolbar extends React.PureComponent{
-  renderItem(item: PaneConfig) {
+const Toolbar = () => {
+  const area = skeleton.getArea(AreaType.ToolBar)!;
+  const [visible, setVisible] = useState(area.getVisible());
+
+  useEffect(() => {
+    const unsubscribe = area.onVisibleChange((visible) => {
+      setVisible(visible);
+    });
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+  const renderItem = (item: PanelConfig) => {
     const { content, contentProps = {} } = item;
     return (
       <div key={utils.uniqueId('toolbar-item')} className="graphix-skeleton-content-toolbar-item">
@@ -18,17 +30,16 @@ export default class Toolbar extends React.PureComponent{
     )
   }
 
-  render() {
-    const area = skeleton.getArea(AreaType.ToolBar);
-    if (!area || !area.getVisible()) {
-      return null;
-    }
-    return (
-      <div className="graphix-skeleton-content-toolbar">
-        {
-          area.getPanels().map(item => this.renderItem(item))
-        }
-      </div>
-    );
+  if (!visible) {
+    return null;
   }
+  return (
+    <div className="graphix-skeleton-content-toolbar">
+      {
+        area.getPanels().map(item => renderItem(item))
+      }
+    </div>
+  );
 }
+
+export default Toolbar;

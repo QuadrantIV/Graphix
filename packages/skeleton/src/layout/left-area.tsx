@@ -1,10 +1,22 @@
-import React from 'react';
-import { Area, AreaType, PaneConfig } from '../area';
+import React, { useEffect, useState } from 'react';
+import { Area, AreaType, PanelConfig } from '../area';
 import { createContent } from '../utils';
 import { skeleton } from '../skeleton-model';
 
-export default class LeftArea extends React.PureComponent {
-  renderItem(item: PaneConfig) {
+const LeftArea = () => {
+  const area = skeleton.getArea(AreaType.LeftArea)!;
+  const [visible, setVisible] = useState(area.getVisible());
+
+  useEffect(() => {
+    const unsubscribe = area.onVisibleChange((visible) => {
+      setVisible(visible);
+    });
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+  const renderItem = (item: PanelConfig) => {
     const { content, contentProps = {} } = item;
     return (
       <>
@@ -17,17 +29,16 @@ export default class LeftArea extends React.PureComponent {
     )
   }
 
-  render() {
-    const area = skeleton.getArea(AreaType.LeftArea);
-    if (!area || !area.getVisible()) {
-      return null;
-    }
-    return (
-      <div className="graphix-skeleton-content-leftarea">
-        {
-          area.getPanels().map(item => this.renderItem(item))
-        }
-      </div>
-    )
+  if (!visible) {
+    return null;
   }
+  return (
+    <div className="graphix-skeleton-content-leftarea">
+      {
+        area.getPanels().map(item => renderItem(item))
+      }
+    </div>
+  )
 }
+
+export default LeftArea;

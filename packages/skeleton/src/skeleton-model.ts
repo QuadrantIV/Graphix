@@ -1,4 +1,4 @@
-import { Area, AreaType, PaneConfig } from "./area";
+import { Area, AreaType, PanelConfig } from "./area";
 
 /**
  * 骨架模型
@@ -12,7 +12,7 @@ export class Skeleton {
     });
   }
 
-  add(config: PaneConfig) {
+  add(config: PanelConfig) {
     const area = this.areas.find(v => v.getType() === config.area);
     area?.add(config);
   }

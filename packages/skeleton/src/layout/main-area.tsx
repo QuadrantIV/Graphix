@@ -1,11 +1,23 @@
 import { Document } from 'graphix-model';
 import { createContent } from '../utils';
-import React from 'react';
-import { Area, AreaType, PaneConfig } from '../area';
+import React, { useEffect, useState } from 'react';
+import { Area, AreaType, PanelConfig } from '../area';
 import { skeleton } from '../skeleton-model';
 
-export default class MainArea extends React.PureComponent {
-  renderItem(item: PaneConfig) {
+const MainArea = () => {
+  const area = skeleton.getArea(AreaType.MainArea)!;
+  const [visible, setVisible] = useState(area.getVisible());
+
+  useEffect(() => {
+    const unsubscribe = area.onVisibleChange((visible) => {
+      setVisible(visible);
+    });
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+  const renderItem = (item: PanelConfig) => {
     const { content, contentProps = {} } = item;
     return (
       <>
@@ -18,17 +30,16 @@ export default class MainArea extends React.PureComponent {
     )
   }
 
-  render() {
-    const area = skeleton.getArea(AreaType.MainArea);
-    if (!area || !area.getVisible()) {
-      return null;
-    }
-    return (
-      <div className="graphix-skeleton-content-mainarea">
-        {
-          area.getPanels().map(item => this.renderItem(item))
-        }
-      </div>
-    )
+  if (!visible) {
+    return null;
   }
+  return (
+    <div className="graphix-skeleton-content-mainarea">
+      {
+        area.getPanels().map(item => renderItem(item))
+      }
+    </div>
+  )
 }
+
+export default MainArea;
