@@ -1,7 +1,7 @@
 {
   "name": "graphix-skeleton",
   "author": "yangling",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Graphix Skeleton",
   "main": "lib/index.js",
   "module": "es/index.js",
