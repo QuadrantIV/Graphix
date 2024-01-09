@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/graphix-editor/Graphix/compare/v1.0.8...v1.0.9) (2024-01-09)
+
+
+### Features
+
+* add render skeleton view function ([2e28a8f](https://github.com/graphix-editor/Graphix/commit/2e28a8f8998fe7f1e85fa497f79e37befe7efa67))
+
+
+
+
+
 ## [1.0.8](https://github.com/graphix-editor/Graphix/compare/v1.0.7...v1.0.8) (2024-01-08)
 
 **Note:** Version bump only for package graphix-engine

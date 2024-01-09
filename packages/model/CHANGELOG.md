@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.9](https://github.com/graphix-editor/Graphix/compare/v1.0.8...v1.0.9) (2024-01-09)
+
+
+### Bug Fixes
+
+* 指定 SetterComponentType ([79b7aa6](https://github.com/graphix-editor/Graphix/commit/79b7aa6b3db720d2e7aed7dde064cc49d568162e))
+
+
+
+
+
 ## [1.0.8](https://github.com/graphix-editor/Graphix/compare/v1.0.7...v1.0.8) (2024-01-08)
 
 **Note:** Version bump only for package graphix-model
