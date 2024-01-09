@@ -28,7 +28,7 @@
 | 图形渲染引擎       | 用于中心区域的画布渲染，常见 2d/3d 渲染库：three.js, babylon.js, g6/x6，d3 等等 |
 
 ## 🎬 Demo
-### [Bpm 场景](https://graphix-editor.github.io/Graphix/)（graphix + antv x6）
+### [Bpm 场景](https://graphix-editor.github.io/graphix-docs/example-bpms)（graphix + antv x6）
 ![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)
 
 ### 3D 场景
@@ -58,9 +58,10 @@ init({
   schema: {},
 });
 ```
+完整示例代码参考 [example-bpms](https://github.com/graphix-editor/Graphix/tree/main/examples/bpms)
 
 ## 📖 文档
-todo
+[Graphix docs](https://graphix-editor.github.io/graphix-docs/)
 
 ## 💻 本地调试
 

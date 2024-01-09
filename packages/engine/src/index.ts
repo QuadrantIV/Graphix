@@ -4,8 +4,11 @@ import { createElement } from 'react';
 import { render as reactRender } from 'react-dom';
 
 interface InitOptions {
+  // 挂载点
   container?: Element;
+  // schema 描述
   schema: DocumentData;
+  // 全局设置
   globalSettings?: SettingConfig[];
 }
 
