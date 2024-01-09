@@ -1,4 +1,4 @@
-import { init, config, pluginRegistry, prototypeRegistry, skeleton, AreaType } from 'graphix-engine';
+import { init, pluginRegistry, prototypeRegistry, skeleton, AreaType, workspace, render } from 'graphix-engine';
 import { DemoSchema } from './schema/demo';
 import {
   StartEvent,
@@ -14,7 +14,7 @@ import Designer from './plugin/designer';
 import Toolbar from './plugin/toolbar';
 import InputSetter from './component/setter/input-setter';
 
-(async () => {
+const bpmsInit = (container?: Element) => {
   // skeleton 适配
   skeleton.getArea(AreaType.RightArea)?.setTitle('全局设置');
 
@@ -30,6 +30,7 @@ import InputSetter from './component/setter/input-setter';
 
   // 启动
   init({
+    container,
     schema: DemoSchema,
     // 全局属性
     globalSettings: [
@@ -42,4 +43,9 @@ import InputSetter from './component/setter/input-setter';
       },
     ]
   });
-})();
+}
+
+export {
+  bpmsInit,
+  render
+}

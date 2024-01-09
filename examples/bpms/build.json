@@ -1,4 +1,6 @@
 {
+  "library": "GraphixExampleBpms",
+  "libraryTarget": "umd",
   "entry": {
     "index": "./src/"
   },

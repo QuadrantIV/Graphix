@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Document, Node, config, workspace, utils } from 'graphix-model';
+import { Document, Node, workspace, utils } from 'graphix-model';
 import { Area, AreaType } from '../area';
 import { skeleton } from '../skeleton-model';
 import { createContent } from '../utils';
 
 const { uniqueId } = utils;
 const RightArea = () => {
+  const area = skeleton.getArea(AreaType.RightArea)!;
+  const [visible, setVisible] = useState(area.getVisible());
   const [selected, setSelected] = useState<Node | null>(null);
   const doc = workspace.getDocument();
+
+  useEffect(() => {
+    const unsubscribe = area.onVisibleChange((visible) => {
+      setVisible(visible);
+    });
+    return () => {
+      unsubscribe();
+    }
+  }, []);
 
   useEffect(() => {
     const selections = doc.getSelection().getKeys();
@@ -26,8 +37,7 @@ const RightArea = () => {
     };
   }, []);
 
-  const area = skeleton.getArea(AreaType.RightArea);
-  if (!area || !area.getVisible()) {
+  if (!visible) {
     return null;
   }
   const defaultTitle = area.getTitle() || 'Settings';

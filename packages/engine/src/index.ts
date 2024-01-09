@@ -1,7 +1,7 @@
 import { pluginRegistry, workspace, DocumentData, SettingConfig } from 'graphix-model';
 import { SkeletonView } from 'graphix-skeleton';
 import { createElement } from 'react';
-import { render } from 'react-dom';
+import { render as reactRender } from 'react-dom';
 
 interface InitOptions {
   container?: Element;
@@ -19,8 +19,8 @@ export async function init(options: InitOptions) {
   if (!engineContainer) {
     engineContainer = document.createElement('div');
     document.body.appendChild(engineContainer);
+    engineContainer.id = 'graphix-engine';
   }
-  engineContainer.id = 'graphix-engine';
 
   // init document
   workspace.initDocument(schema, globalSettings);
@@ -30,9 +30,17 @@ export async function init(options: InitOptions) {
     await plugin.init();
   }
 
-  render(
+  render(engineContainer);
+}
+
+/**
+ * render skeleton view
+ * @param container 
+ */
+export function render(container: Element) {
+  reactRender(
     createElement(SkeletonView),
-    engineContainer,
+    container,
   );
 }
 
