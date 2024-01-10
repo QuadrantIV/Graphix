@@ -11,7 +11,7 @@ export default class Node {
   private emitter: EventEmitter = new EventEmitter();
   private id: string;
   private type: string;
-  private prototype: Prototype;
+  private prototype?: Prototype;
   private propsData: PropsData;
   private settings: Setting[];
 
@@ -21,19 +21,19 @@ export default class Node {
     // get prototype
     const prototype = prototypeRegistry.getPrototypeByType(this.type);
     if (!prototype) {
-      throw Error(`The ${this.type} type component (prototype) does not exist`);
+      console.warn(`The ${this.type} type component (prototype) does not exist`);
     }
     this.prototype = prototype;
 
     // init propsData
     const propsData = nodeData.props || {};
     this.propsData = {
-      ...prototype.getProps(),
+      ...prototype?.getProps(),
       ...propsData
     };
 
     // init settings
-    this.settings = prototype.getSettings().map(config => new Setting(this, config));
+    this.settings = prototype?.getSettings().map(config => new Setting(this, config)) || [];
   }
 
   getDocument() {
@@ -48,7 +48,7 @@ export default class Node {
     return this.type;
   }
 
-  getPrototype(): Prototype {
+  getPrototype(): Prototype | undefined {
     return this.prototype;
   }
 

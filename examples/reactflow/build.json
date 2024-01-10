@@ -1,0 +1,16 @@
+{
+  "library": "GraphixExampleReactflow",
+  "libraryTarget": "umd",
+  "entry": {
+    "index": "./src/"
+  },
+  "publicPath": "/Graphix",
+  "externals": {
+    "react": "var window.React",
+    "react-dom": "var window.ReactDOM"
+  },
+  "plugins": [
+    "build-plugin-react-app",
+    "./build.plugin.js"
+  ]
+}

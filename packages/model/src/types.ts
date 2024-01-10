@@ -50,7 +50,7 @@ export interface PrototypeConfig {
   /**
    * 组件视图
    */
-  view: View;
+  view?: View;
   /**
    * 组件参数枚举
    */

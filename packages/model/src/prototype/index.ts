@@ -12,7 +12,7 @@ export default class Prototype {
     this.type = config.type || '';
     this.settings = config.settings || [];
     this.props = config.props || {};
-    this.view = config.view;
+    this.view = config.view || {};
   }
 
   getConfig(configKey: string): PrototypeConfig | any {

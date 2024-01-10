@@ -46,7 +46,7 @@ const RightArea = () => {
     <div className="rightarea">
       <div className="rightarea-header">
         <div className="rightarea-header-title">
-          {selected ? selected.getPropData('name') || selected.getType() : defaultTitle}
+          {selected ? selected.getPropData('name') || selected.getPropData('label')  || selected.getType() : defaultTitle}
         </div>
         <div></div>
       </div>
