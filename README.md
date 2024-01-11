@@ -1,18 +1,18 @@
 # [Graphix](https://graphix-editor.github.io/graphix-docs/)
-一个轻量的、插件化图形编辑器开发库。
+一个轻量级、可插拔、OOP 式图形编辑器开发引擎。
 
 简体中文 | [English](./README-EN.md)
 
 ## ✨ 特性
-- 💡 领域模型：基于 TypeScript 的 OOP 式编辑器领域模型，配套撤销恢复，选区管理等数据服务。
-- 🎨 UI 界面：可深度定制的响应式 Skeleton View。
-- 🧩 插件化：通过可插拔 Plugin 扩展编辑器功能。
+💡 领域驱动设计：基于 TypeScript 的 OOP 式编辑器领域模型，提供完整的数据服务支持，包括撤销/重做机制和选区管理等功能。
+🎨 用户界面：提供高度可定制的响应式视图框架 Skeleton View，以满足不同的界面需求。
+🧩 可扩展架构：基于插件的体系结构允许无缝扩展编辑器功能，无需更改任何核心代码，使得功能增加更加灵活和便捷。
 
 ## 🔍 名词解释
 | 名词         | 说明                                                       |
 | ------------ | ---------------------------------------------------------- |
 | 骨架（Skeleton） | Topbar，Toolbar，MainArea, LeftArea，RightArea ![](https://img.alicdn.com/imgextra/i2/O1CN019QcFzr1GdSNRsXzXC_!!6000000000645-2-tps-3584-1854.png)                |
-| 插件（Plugin）   | 通常用于扩展编辑器各面板展示                                       |
+| 插件（Plugin）   | 通常用于扩展编辑器骨架各面板展示                                       |
 | 原型（Prototype）| 节点原型描述，用于描述编辑器不同类型图形节点的 视图、属性设置器、默认属性值等等 |
 | 设置器（Setting）| 用于描述图形节点的属性如何配置                                      |
 | 图形渲染引擎       | 用于中心区域的图形画布渲染，常见 2d/3d 渲染库：three.js, babylon.js，reactflow，d3 等等 |

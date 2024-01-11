@@ -1,13 +1,13 @@
 > Translate by chatGPT
 # [Graphix](https://graphix-editor.github.io/graphix-docs/)
-A lightweight, plugin-based graphics editor development library.
+A lightweight, pluggable, OOP-style graphics editing engine.
 
 [简体中文](./README.md) | English
 
 ## ✨ Features
-- 💡 Domain Model: An OOP-style editor domain model based on TypeScript, accompanied by data services for undo/redo and selection management.
-- 🎨 UI Interface: A deeply customizable responsive Skeleton View.
-- 🧩 Plugin System: Extend editor features through pluggable Plugins.
+- 💡 Domain-Driven Design: An OOP-style editor domain model based on TypeScript, providing complete data service support, including undo/redo mechanisms and selection management, among other features.
+- 🎨 User Interface: Offers a highly customizable, responsive view framework called Skeleton View, tailored to meet diverse interface requirements.
+- 🧩 Extensible Architecture: A plugin-based architecture allows for seamless expansion of editor capabilities without the need to alter any core code, making the addition of functions more flexible and convenient.
 
 ## 🔍 Glossary
 | Term              | Description                                                  |
