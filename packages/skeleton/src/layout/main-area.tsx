@@ -1,4 +1,3 @@
-import { Document } from 'graphix-model';
 import { createContent } from '../utils';
 import React, { useEffect, useState } from 'react';
 import { Area, AreaType, PanelConfig } from '../area';

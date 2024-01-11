@@ -15,8 +15,7 @@ export default class Timeline {
     this.points = [this.currentPoint];
     this.currentPoint.end();
     this.cursor = 0;
-
-    // tslint:disable-next-line
+    
     console.log('%c Open', 'color:#03A9F4;font-weight:bold;line-height:19px', initialData);
   }
 

@@ -5,9 +5,15 @@ import RightPanel from './layout/right-area';
 import Toolbar from './layout/toolbar';
 import MainArea from './layout/main-area';
 import './style/index.less';
+import { Context } from 'graphix-model';
 
-export class SkeletonView extends React.PureComponent {
+interface Props {
+  context: Context;
+}
+
+export class SkeletonView extends React.PureComponent<Props> {
   render() {
+    const { context } = this.props;
     return (
       <div className="graphix-skeleton">
         <TopBar/>
@@ -17,7 +23,7 @@ export class SkeletonView extends React.PureComponent {
             <Toolbar />
             <MainArea />
           </div>
-          <RightPanel />
+          <RightPanel context={context} />
         </div>
       </div>
     )

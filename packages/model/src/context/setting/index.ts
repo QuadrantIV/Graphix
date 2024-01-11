@@ -1,20 +1,18 @@
 import EventEmitter from 'events';
 import { uniqueId } from '../../utils';
 import Node from '../node';
-import Document from '..';
+import Context from '..';
 import { SetterType, SettingConfig } from '../../types'; 
 
 export default class Setting {
   private uid: string = uniqueId('setting');
   private emitter: EventEmitter = new EventEmitter();
-  private key: string;
+  private target: string;
   private setter: SetterType;
-  private setterProps: object
 
-  constructor(private owner: Node | Document, config: SettingConfig) {
-    this.key = config.key;
+  constructor(private owner: Node | Context, config: SettingConfig) {
+    this.target = config.target;
     this.setter = config.setter;
-    this.setterProps = config.setterProps || {};
   }
 
   getId(): string {
@@ -25,25 +23,21 @@ export default class Setting {
     return this.owner;
   }
 
-  getKey() {
-    return this.key;
+  getTarget() {
+    return this.target;
   }
 
   getSetter(): SetterType {
     return this.setter;
   }
 
-  getSetterProps() {
-    return this.setterProps;
-  }
-
   getVaule() {
-    const { owner, key } = this;
+    const { owner, target: key } = this;
     return owner.getPropData(key);
   }
 
   setValue(value: any) {
-    const { owner, key } = this;
+    const { owner, target: key } = this;
     owner.setPropData(key, value);
     this.emitter.emit('valuechange');
   }

@@ -8,15 +8,14 @@ import ReactFlow, {
   Node,
   OnSelectionChangeParams,
 } from 'reactflow';
-import { PluginConfig, skeleton, workspace } from 'graphix-engine';
+import { PluginConfig, skeleton, getContext } from 'graphix-engine';
 import 'reactflow/dist/style.css';
 
 // 从 docment 模型数据中获取转换成 reacflow 渲染需要的数据
 const getModelFromDoc = () => {
   let nodes: Node[] = [];
   let edges: Edge[] = [];
-  const doc = workspace.getDocument();
-  for (const n of doc.getNodes()) {
+  for (const n of getContext().getNodes()) {
     if (n.getType() === 'node') {
       nodes.push({ id: n.getId(), position: n.getPropData('position'), data: n.getPropsData() });
     } else {
@@ -28,14 +27,14 @@ const getModelFromDoc = () => {
 
 // 画布
 function GraphView() {
-  const doc = workspace.getDocument();
+  const context = getContext();
   const { nodes: initialNodes, edges: initialEdges } = getModelFromDoc();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   // 监听 document 模型数据变化，同步渲染
   useEffect(() => {
-    const unsubscribe = doc.getTimeline().onStateChange((state) => {
+    const unsubscribe = context.getTimeline().onStateChange((state) => {
       const { nodes: curNodes, edges: curEdges } = getModelFromDoc();
       setNodes(curNodes);
       setEdges(curEdges);
@@ -48,7 +47,7 @@ function GraphView() {
   // selection 选区管理
   const onSelectionChange = (changes: OnSelectionChangeParams) => {
     const { nodes } = changes;
-    doc.getSelection().setKeys(nodes.map((n) => n.id));
+    context.getSelection().setKeys(nodes.map((n) => n.id));
   };
 
   return (

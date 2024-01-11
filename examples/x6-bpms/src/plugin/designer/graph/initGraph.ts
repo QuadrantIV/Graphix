@@ -1,11 +1,12 @@
 import { CommonLineView } from '../../../component/shape';
 import { Graph } from '@antv/x6';
 import { Snapline } from '@antv/x6-plugin-snapline';
-import { workspace } from 'graphix-model';
+import { getContext } from 'graphix-engine';
 import { EdgeType } from '../../../component/types';
 
 export let graph: Graph = undefined!;
 export default function initGraph(container: HTMLDivElement) {
+  const context = getContext();
   graph = new Graph({
     container,
     autoResize: true,
@@ -42,7 +43,7 @@ export default function initGraph(container: HTMLDivElement) {
         });
       },
       validateEdge({ edge }) {
-        workspace.getDocument().addNode({
+        context.addNode({
           type: EdgeType.SequenceFlow,
           props: {
             source: { id: edge.getSourceCellId(), port: edge.getSourcePortId() },
@@ -61,15 +62,15 @@ export default function initGraph(container: HTMLDivElement) {
   );
 
   graph.on('blank:click', ({ e, x, y}) => {
-    workspace.getDocument().getSelection().setKeys([]);
+    context.getSelection().setKeys([]);
   });
 
   graph.on('cell:click', ({ e, x, y, cell, view }) => {
-    workspace.getDocument().getSelection().setKeys([cell.id]);
+    context.getSelection().setKeys([cell.id]);
   });
 
   graph.on('node:moved', ({ e, x, y, cell, view  }) => {
-    const node = workspace.getDocument().getNode(cell.id);
+    const node = context.getNode(cell.id);
     const position = cell.getPosition();
     node?.setPropData('position', position);
   });

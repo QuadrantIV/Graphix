@@ -2,7 +2,7 @@ import React from 'react';
 import NodeComponent from './node';
 import EdgeComponent from './edge';
 import { Node, Edge, Graph } from '@antv/x6';
-import { Node as GraphixNode, workspace } from 'graphix-engine';
+import { Node as GraphixNode, getContext } from 'graphix-engine';
 import { EdgeType, NodeType } from '../../../component/types';
 
 interface Props {
@@ -19,11 +19,11 @@ class Views extends React.PureComponent<Props> {
 
   componentDidMount() {
     const { graph } = this.props;
-    const doc = workspace.getDocument();
+
     graph.resetCells([...this.x6Nodes, ...this.x6Edges]);
     this.mounted = true;
 
-    doc.getTimeline().onStateChange(state => {
+    getContext().getTimeline().onStateChange(state => {
       this.forceUpdate();
     });
   }
@@ -75,7 +75,7 @@ class Views extends React.PureComponent<Props> {
     const { graph } = this.props;
     let nodes: GraphixNode[] = [];
     let edges: GraphixNode[] = [];
-    for(const item of workspace.getDocument().getNodes()) {
+    for(const item of getContext().getNodes()) {
       if (item.getType() === EdgeType.SequenceFlow) {
         edges.push(item);
       } else {

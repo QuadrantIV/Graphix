@@ -15,7 +15,7 @@ export default class Prototype {
     this.view = config.view || {};
   }
 
-  getConfig(configKey: string): PrototypeConfig | any {
+  getConfig(configKey?: string): PrototypeConfig | any {
     if (!configKey) {
       return this.config;
     }

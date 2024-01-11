@@ -1,32 +1,26 @@
 import { PrototypeConfig } from 'graphix-engine';
 import { NodeType, ShapeType } from './types';
 import InputSetter from './setter/input-setter';
-import { componentsInfo } from '../constant';
+import { GatewayXOR } from '../icon';
 
 const prototype: PrototypeConfig = {
+  icon: GatewayXOR,
   type: NodeType.ExclusiveGateway,
   view: {
     shape: ShapeType.Common,
-    data: componentsInfo.ExclusiveGateway
   },
   props: {
-    name: componentsInfo.ExclusiveGateway.name,
-    description: componentsInfo.ExclusiveGateway.description
+    name: '排他网关',
+    description: '在流程中进行条件分支的节点',
   },
   settings: [
     {
-      key: 'name',
+      target: 'name',
       setter: InputSetter,
-      setterProps: {
-        title: '名称'
-      }
     },
     {
-      key: 'description',
+      target: 'description',
       setter: InputSetter,
-      setterProps: {
-        title: '描述'
-      }
     }
   ],
 };

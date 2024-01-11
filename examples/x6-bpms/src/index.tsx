@@ -1,4 +1,4 @@
-import { init, pluginRegistry, prototypeRegistry, skeleton, AreaType, workspace, render } from 'graphix-engine';
+import { init, pluginRegistry, prototypeRegistry, skeleton, AreaType, render } from 'graphix-engine';
 import { DemoSchema } from './schema/demo';
 import {
   StartEvent,
@@ -35,11 +35,8 @@ const bpmsInit = (container?: Element) => {
     // 全局属性
     globalSettings: [
       {
-        key: 'variables',
+        target: 'variables',
         setter: InputSetter,
-        setterProps: {
-          title: '全局变量',
-        },
       },
     ]
   });

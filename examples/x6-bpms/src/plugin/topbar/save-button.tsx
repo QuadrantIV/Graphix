@@ -1,9 +1,9 @@
-import { workspace } from 'graphix-engine';
+import { getContext } from 'graphix-engine';
 import { Button } from '@alifd/next';
 
 const SaveButton = () => {
   const onClick = () => {
-    const data = workspace.getDocument().getData();
+    const data = getContext().getData();
     console.log(data);
   }
   return (

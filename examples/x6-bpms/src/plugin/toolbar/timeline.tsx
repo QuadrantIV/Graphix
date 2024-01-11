@@ -1,13 +1,13 @@
-import { workspace } from 'graphix-engine';
+import { getContext } from 'graphix-engine';
 import { Button } from '@alifd/next';
 
 const Timeline = () => {
   const undo = () => {
-    workspace.getDocument().getTimeline().back();
+    getContext().getTimeline().back();
   }
 
   const redo = () => {
-    workspace.getDocument().getTimeline().forward();
+    getContext().getTimeline().forward();
   }
   return (
     <div>

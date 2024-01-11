@@ -2,15 +2,22 @@ import { Node } from '@antv/x6';
 import { register } from '@antv/x6-react-shape';
 import './index.less';
 import { ShapeType } from '../types';
+import { prototypeRegistry, createContent } from 'graphix-engine';
 
 const TaskShape = ({ node }: { node: Node }) => {
-  const { icon, name, description } = node.getData();
+  // 当前节点属性数据
+  const { type, name, description } = node.getData();
+  // 节点原型描述
+  const prototype = prototypeRegistry.getPrototypeByType(type)!;
+  const { icon } = prototype.getConfig();
+  const { name: defaultName, description: defaultDescription } = prototype.getProps();
+  
   return (
     <div className="task-shape">
-      <div>{icon}</div>
+      <div>{ createContent(icon) }</div>
       <div>
-        <div className="task-shape-name">{name}</div>
-        <div className="task-shape-description">{description}</div>
+        <div className="task-shape-name">{name || defaultName}</div>
+        <div className="task-shape-description">{description || defaultDescription}</div>
       </div>
     </div>
   )

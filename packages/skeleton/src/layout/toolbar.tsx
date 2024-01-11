@@ -1,6 +1,6 @@
 import React, { createElement, useEffect, useState } from 'react';
 import { Area, AreaType, PanelConfig } from '../area';
-import { utils } from 'graphix-model';
+import { uniqueId } from 'graphix-model';
 import { createContent } from '../utils';
 import { skeleton } from '../skeleton-model';
 
@@ -20,7 +20,7 @@ const Toolbar = () => {
   const renderItem = (item: PanelConfig) => {
     const { content, contentProps = {} } = item;
     return (
-      <div key={utils.uniqueId('toolbar-item')} className="graphix-skeleton-content-toolbar-item">
+      <div key={uniqueId('toolbar-item')} className="graphix-skeleton-content-toolbar-item">
         {
           createContent(content, {
             ...contentProps,

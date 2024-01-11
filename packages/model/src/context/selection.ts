@@ -1,15 +1,15 @@
 import { EventEmitter } from 'events';
-import Document from './index';
+import Context from './index';
 
 export default class Selection {
   private emitter: EventEmitter = new EventEmitter();
   private selections: string[] = [];
 
-  constructor(private documnet: Document) {
+  constructor(private context: Context) {
   }
 
-  getDocument(): Document {
-    return this.documnet;
+  getContext(): Context {
+    return this.context;
   }
 
   getKeys(): string[] {

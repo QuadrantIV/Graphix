@@ -1,32 +1,26 @@
 import { PrototypeConfig } from 'graphix-engine';
 import { NodeType, ShapeType } from './types';
 import InputSetter from './setter/input-setter';
-import { componentsInfo } from '../constant';
+import { GatewayParallel } from '../icon';
 
 const prototype: PrototypeConfig = {
+  icon: GatewayParallel,
   type: NodeType.ParallelGateway,
   view: {
     shape: ShapeType.Common,
-    data: componentsInfo.ParallelGateway
   },
   props: {
-    name: componentsInfo.ParallelGateway.name,
-    description: componentsInfo.ParallelGateway.description
+    name: '并行网关',
+    description: '在流程中进行并行处理的节点'
   },
   settings: [
     {
-      key: 'name',
+      target: 'name',
       setter: InputSetter,
-      setterProps: {
-        title: '名称'
-      }
     },
     {
-      key: 'description',
+      target: 'description',
       setter: InputSetter,
-      setterProps: {
-        title: '描述'
-      }
     }
   ],
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Area, AreaType, PanelConfig } from '../area';
 import { createContent } from '../utils';
 import { skeleton } from '../skeleton-model';
-import { utils } from 'graphix-model';
+import { uniqueId } from 'graphix-model';
 
 const Topbar = () => {
   const area = skeleton.getArea(AreaType.TopBar)!;
@@ -20,7 +20,7 @@ const Topbar = () => {
   const renderItem = (item: PanelConfig) => {
     const { content, contentProps = {} } = item;
     return (
-      <div key={utils.uniqueId('topbar-item')} className="graphix-skeleton-topbar-item">
+      <div key={uniqueId('topbar-item')} className="graphix-skeleton-topbar-item">
         {
           createContent(content, {
             ...contentProps,

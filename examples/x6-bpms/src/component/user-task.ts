@@ -1,32 +1,26 @@
 import { PrototypeConfig } from 'graphix-engine';
 import { NodeType, ShapeType } from './types';
 import InputSetter from './setter/input-setter';
-import { componentsInfo } from '../constant';
+import { UserTaskIcon } from '../icon';
 
 const prototype: PrototypeConfig = {
+  icon: UserTaskIcon,
   type: NodeType.UserTask,
   view: {
     shape: ShapeType.Common,
-    data: componentsInfo.UserTask
   },
   props: {
-    name: componentsInfo.UserTask.name,
-    description: componentsInfo.UserTask.description
+    name: '用户任务',
+    description: '由人工处理的任务'
   },
   settings: [
     {
-      key: 'name',
+      target: 'name',
       setter: InputSetter,
-      setterProps: {
-        title: '名称'
-      }
     },
     {
-      key: 'description',
+      target: 'description',
       setter: InputSetter,
-      setterProps: {
-        title: '描述'
-      }
     }
   ],
 };

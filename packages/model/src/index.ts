@@ -1,38 +1,30 @@
 import { Plugin } from './plugin';
 import Prototype from './prototype';
-import * as utils from './utils';
 import {
   prototypeRegistry,
   setterRegistry,
   pluginRegistry
 } from './instance';
-import Workspace from './workspace';
-import Document from './document';
-import Node from './document/node';
-import DocumentCollection from './document/collection';
-import Selection from './document/selection';
-import Timeline from './document/timeline';
-import Setting from './document/setting';
-
-const workspace = new Workspace();
+import Context from './context';
+import Node from './context/node';
+import Selection from './context/selection';
+import Timeline from './context/timeline';
+import Setting from './context/setting';
 
 // instrance
 export {
-  workspace,
   prototypeRegistry,
   setterRegistry,
   pluginRegistry,
-  utils
 }
 
 // class，type
 export {
-  Workspace,
-  Document,
-  DocumentCollection,
+  Context,
   Prototype, Plugin,
   Node, Setting,
   Selection, Timeline
 };
 
 export * from './types';
+export * from './utils';

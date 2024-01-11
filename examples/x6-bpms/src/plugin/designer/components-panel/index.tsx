@@ -1,14 +1,23 @@
 import { graph } from "../graph/initGraph";
 import { dnd } from "../graph/initDnd";
-import { prototypeRegistry } from "graphix-model";
-import { componentsInfo } from "../../../constant";
+import { prototypeRegistry, createContent } from "graphix-engine";
+import { NodeType } from "../../../component/types";
+
+export const Components = [
+  NodeType.UserTask,
+  NodeType.ServiceTask,
+  NodeType.ExclusiveGateway,
+  NodeType.ParallelGateway
+]
 
 const ComponentsPanel = () => {
   const startDrag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, type: string) => {
     const view: any = prototypeRegistry.getPrototypeByType(type)?.getView() || {};
-    (view.data || {})['type'] = type;
     const node = graph.createNode({
       ...view,
+      data: {
+        type
+      }
     });
     dnd.start(node, e.nativeEvent);
   };
@@ -18,15 +27,16 @@ const ComponentsPanel = () => {
       <div className="components-panel-title">节点库</div>
       <div className="components-panel-content">
         {
-          Object.keys(componentsInfo).map(key => {
-            // @ts-ignore
-            const compInfo = componentsInfo[key] || {};
+          Components.map(type => {
+            const prototype = prototypeRegistry.getPrototypeByType(type)!;
+            const { icon } = prototype.getConfig();
+            const { name, description } = prototype.getProps();
             return (
-              <div className="components-panel-item" onMouseDown={(e) => startDrag(e, key)}>
-              <div>{compInfo.icon}</div>
+              <div className="components-panel-item" onMouseDown={(e) => startDrag(e, type)}>
+              <div>{createContent(icon)}</div>
               <div>
-                <div className="components-panel-item-name">{compInfo.name}</div>
-                <div className="components-panel-item-description">{compInfo.description}</div>
+                <div className="components-panel-item-name">{name}</div>
+                <div className="components-panel-item-description">{description}</div>
               </div>
             </div>
             )

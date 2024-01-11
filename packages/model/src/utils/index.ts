@@ -11,4 +11,8 @@ export function uniqueId(prefix: string = ''): string {
   return `${prefix}${(UID_BASE++).toString(36).toLowerCase()}`;
 }
 
+export function isNode(node: any): node is Node {
+  return true;
+}
+
 export * from './scheduler';

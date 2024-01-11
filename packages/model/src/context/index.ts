@@ -1,23 +1,20 @@
 import { EventEmitter } from 'events';
 import Setting from './setting';
-import { uniqueId } from '../utils';
+import { isNode, uniqueId } from '../utils';
 import Selection from './selection';
 import Timeline from './timeline';
 import Node from './node';
-import { DocumentData, PropsData, NodeData, SettingConfig } from '../types';
+import { Schema, PropsData, NodeData, SettingConfig } from '../types';
 
 interface NodeMap {
   [uid: string]: Node | null;
 }
-function isNode(node: any): node is Node {
-  return true;
-}
 
-export default class Document {
+export default class Context {
   private emitter: EventEmitter = new EventEmitter();
   private id: string;
-  private documentType: string;
-  private documentVersion: string;
+  private type: string;
+  private version: string;
   private propsData: PropsData;
   private settings: Setting[];
   private nodes: Node[];
@@ -25,11 +22,11 @@ export default class Document {
   private selection: Selection;
   private timeline: Timeline;
 
-  constructor(data: DocumentData, settingsConfig: Array<SettingConfig> = []) {
-    const { id, documentType, documentVersion, props = {}, nodes = [] } = data;
-    this.id = id || uniqueId('document');
-    this.documentType = documentType || '';
-    this.documentVersion = documentVersion || '';
+  constructor(data: Schema, settingsConfig: Array<SettingConfig> = []) {
+    const { id, type, version, props = {}, nodes = [] } = data;
+    this.id = id || uniqueId('context');
+    this.type = type || '';
+    this.version = version || '';
     // init nodes
     this.nodes = nodes.map((nodeData: NodeData) => {
       const node = new Node(this, nodeData);
@@ -45,7 +42,7 @@ export default class Document {
     // init timeline
     this.timeline = new Timeline(
       () => this.getData(),
-      (pointData: DocumentData) => this.applyTimelinePointData(pointData),
+      (pointData: Schema) => this.applyTimelinePointData(pointData),
     );
   }
 
@@ -100,7 +97,7 @@ export default class Document {
 
   setPropsData(value: PropsData) {
     this.propsData = value;
-    const desc = `Modify document(#${this.getId()}) props ${Object.keys(value)}`;
+    const desc = `Modify context(#${this.getId()}) props ${Object.keys(value)}`;
     this.getTimeline().log(desc);
     this.emitter.emit('propsChange', value);
   }
@@ -112,12 +109,12 @@ export default class Document {
   setPropData(key: string, value: any) {
     this.propsData[key] = value;
     const prop = { key, value };
-    const desc = `Modify document(#${this.getId()}) props ${key}`;
+    const desc = `Modify context(#${this.getId()}) props ${key}`;
     this.getTimeline().log(desc);
     this.emitter.emit('propsChange', prop);
   }
 
-  applyTimelinePointData(data: DocumentData): void {
+  applyTimelinePointData(data: Schema): void {
     const { props, nodes = [] } = data;
     this.propsData = props || {};
 
@@ -147,11 +144,11 @@ export default class Document {
     }
   }
 
-  getData(): DocumentData {
+  getData(): Schema {
     return {
       id: this.id,
-      documentType: this.documentType,
-      documentVersion: this.documentVersion,
+      type: this.type,
+      version: this.version,
       props: this.propsData,
       nodes: this.nodes.map(node => node.getData()),
     };

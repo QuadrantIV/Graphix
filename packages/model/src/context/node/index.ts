@@ -3,7 +3,7 @@ import { prototypeRegistry } from '../../instance';
 import Prototype from '../../prototype';
 import Settings from '../setting';
 import { hasOwn, uniqueId } from '../../utils';
-import Document from '..';
+import Context from '..';
 import Setting from '../setting';
 import { PropsData, NodeData } from '../../types';
 
@@ -15,7 +15,7 @@ export default class Node {
   private propsData: PropsData;
   private settings: Setting[];
 
-  constructor(private document: Document, nodeData: NodeData) {
+  constructor(private context: Context, nodeData: NodeData) {
     this.id = nodeData.id || uniqueId('node');
     this.type = nodeData.type;
     // get prototype
@@ -36,8 +36,8 @@ export default class Node {
     this.settings = prototype?.getSettings().map(config => new Setting(this, config)) || [];
   }
 
-  getDocument() {
-    return this.document;
+  getContext() {
+    return this.context;
   }
 
   getId(): string {
@@ -60,7 +60,7 @@ export default class Node {
     this.propsData = value;
     
     const desc = `Modify node(#${this.getId()}) props ${Object.keys(value)}`;
-    this.document.getTimeline().log(desc);
+    this.context.getTimeline().log(desc);
     this.emitter.emit('propsChange', value);
   }
 
@@ -74,7 +74,7 @@ export default class Node {
 
     const prop = { key, value };
     const desc = `Modify node(#${this.getId()}) props ${key}`;
-    this.document.getTimeline().log(desc);
+    this.context.getTimeline().log(desc);
     this.emitter.emit('propsChange', prop);
   }
 
@@ -91,16 +91,16 @@ export default class Node {
   }
 
   select(): void {
-    const { document, id } = this;
-    document.getSelection().setKeys([id]);
+    const { context, id } = this;
+    context.getSelection().setKeys([id]);
   }
 
   remove() {
-    this.document.removeNode(this);
+    this.context.removeNode(this);
   }
 
   copy() {
-    const newContentNode = this.document.addNode({
+    const newContentNode = this.context.addNode({
       type: this.getType(),
       props: this.propsData,
     });

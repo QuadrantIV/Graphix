@@ -37,6 +37,7 @@ const NodeComponent = memo((props: Props) => {
       x6Node.setPosition(position);
 
       x6Node.setData({
+        type: props.type,
         name,
         description
       });

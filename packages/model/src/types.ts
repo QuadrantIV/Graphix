@@ -1,7 +1,7 @@
-export interface DocumentData {
+export interface Schema {
   id?: string;
-  documentType?: string;
-  documentVersion?: string;
+  type?: string;
+  version?: string;
   nodes?: NodeData[];
   props?: PropsData;
   [key: string]: any;
@@ -10,6 +10,7 @@ export interface DocumentData {
 export interface PropsData {
   [propName: string]: any;
 }
+
 export interface NodeData {
   id?: string;
   type: string;
@@ -18,45 +19,36 @@ export interface NodeData {
 }
 
 export interface PluginConfig {
-  /**
-   * 插件名称
-   */
   name: string;
-  /**
-   *  插件初始化
-   */
   init?(): void;
-  /**
-   * 插件销毁
-   */
   destroy?(): void;
-  /**
-   * 插件导出
-   */
   exports?(): any;
 }
 
-export type View = React.ComponentType<any> | object;
+export type View = any;
 
 export interface PropConfig {
   [key: string]: any;
 }
 
+/**
+ * 节点原型描述
+ */
 export interface PrototypeConfig {
   /**
-   * 组件类型名，用于注册
+   * 节点类型
    */
   type: string;
   /**
-   * 组件视图
+   * 节点视图
    */
   view?: View;
   /**
-   * 组件参数枚举
+   * 节点默认属性
    */
   props?: PropConfig;
   /**
-   * 组件设置枚举
+   * 节点可配置设置
    */
   settings?: Array<SettingConfig>;
   /**
@@ -65,13 +57,14 @@ export interface PrototypeConfig {
   [extraKey: string]: any;
 }
 
-export type SetterType = string | {
-  type: string;
-  props?: object;
-} | React.ComponentType<any> | React.ReactElement<any>;
+export type SetterType = string | { type: string; props?: object } | React.ComponentType<any> | React.ReactElement<any>;
 
+/**
+ * 设置器描述
+ */
 export interface SettingConfig {
-  key: string;
+  // 设置对应属性 key
+  target: string;
+  // 设置器视图
   setter: SetterType;
-  setterProps?: object;
 }

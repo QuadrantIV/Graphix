@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Document, Node, workspace, utils } from 'graphix-model';
+import { Context, Node, uniqueId } from 'graphix-model';
 import { Area, AreaType } from '../area';
 import { skeleton } from '../skeleton-model';
 import { createContent } from '../utils';
 
-const { uniqueId } = utils;
-const RightArea = () => {
+const RightArea = (props: { context: Context }) => {
   const area = skeleton.getArea(AreaType.RightArea)!;
   const [visible, setVisible] = useState(area.getVisible());
   const [selected, setSelected] = useState<Node | null>(null);
-  const doc = workspace.getDocument();
+  const { context } = props;
 
   useEffect(() => {
     const unsubscribe = area.onVisibleChange((visible) => {
@@ -21,13 +20,13 @@ const RightArea = () => {
   }, []);
 
   useEffect(() => {
-    const selections = doc.getSelection().getKeys();
+    const selections = context.getSelection().getKeys();
     if (selections.length) {
-      setSelected(doc.getNode(selections[0]));
+      setSelected(context.getNode(selections[0]));
     }
-    const unsubscribe = doc.getSelection().onSelectionChange((keys) => {
+    const unsubscribe = context.getSelection().onSelectionChange((keys) => {
       if (keys.length) {
-        setSelected(doc.getNode(keys[0]));
+        setSelected(context.getNode(keys[0]));
       } else {
         setSelected(null);
       }
@@ -41,7 +40,7 @@ const RightArea = () => {
     return null;
   }
   const defaultTitle = area.getTitle() || 'Settings';
-  const settings = selected ? selected.getSettings() : doc.getSettings();
+  const settings = selected ? selected.getSettings() : context.getSettings();
   return (
     <div className="rightarea">
       <div className="rightarea-header">
@@ -54,7 +53,7 @@ const RightArea = () => {
       <div className="rightarea-content">
         {settings.map((setting) => (
           <div className="rightarea-content-setter-item">
-            {createContent(setting.getSetter(), { key: uniqueId('setter'), setting, ...setting.getSetterProps() })}
+            {createContent(setting.getSetter(), { key: uniqueId('setter'), setting })}
           </div>
         ))}
       </div>
