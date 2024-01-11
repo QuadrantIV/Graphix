@@ -16,5 +16,5 @@
     "build:watch": "build-scripts build --skipDemo --watch"
   },
   "license": "MIT",
-  "gitHead": "c0dba1c64ba675c164a952010e7b5975b520ed3a"
+  "gitHead": "1a2d5993e656870d3d76e619e5686a4919a1c88e"
 }
