@@ -26,7 +26,5 @@ export {
   Selection, Timeline
 };
 
-// types
 export * from './types';
-// utils
 export * from './utils';
