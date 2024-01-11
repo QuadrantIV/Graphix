@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.11](https://github.com/foginn/Graphix/compare/v1.0.10...v1.0.11) (2024-01-11)
+
+**Note:** Version bump only for package example-x6-bpms
+
+
+
+
+
 ## [1.0.9](https://github.com/graphix-editor/Graphix/compare/v1.0.8...v1.0.9) (2024-01-09)
 
 
