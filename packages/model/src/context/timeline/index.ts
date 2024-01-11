@@ -15,8 +15,7 @@ export default class Timeline {
     this.points = [this.currentPoint];
     this.currentPoint.end();
     this.cursor = 0;
-    
-    console.log('%c Open', 'color:#03A9F4;font-weight:bold;line-height:19px', initialData);
+    console.log('%c Open', 'color:rgb(255, 0, 115);font-weight:bold;line-height:19px', initialData);
   }
 
   getPoints(): TimelinePoint[] {
@@ -35,7 +34,6 @@ export default class Timeline {
     if (!this.currentPoint) {
       return;
     }
-
     const data = this.logger();
     if (this.currentPoint.isAlive()) {
       this.currentPoint.log(data);
@@ -47,11 +45,8 @@ export default class Timeline {
       this.points.splice(cursor, this.points.length - cursor, point);
       this.cursor = cursor;
     }
-
-    // tslint:disable-next-line
-    console.log(`%c ${title}`, 'color:#03A9F4;font-weight:bold;line-height:19px', data);
-
     this.emitter.emit('statechange', this.getState());
+    console.log(`%c ${title}`, 'color:rgb(255, 0, 115);font-weight:bold;line-height:19px', data);
   }
 
   go(cursor: number) {
@@ -86,9 +81,7 @@ export default class Timeline {
       this.currentPoint = point;
     });
 
-    // tslint:disable-next-line
     console.log(`%c ${point.getTitle()}`, 'color:#9E9E9E;font-weight:bold;line-height:19px', hotData);
-
     this.emitter.emit('statechange', this.getState());
   }
 
