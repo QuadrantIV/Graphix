@@ -16,6 +16,7 @@ let context: Context;
 function setContext(instance: Context) {
   context = instance;
 }
+
 export function getContext() {
   return context;
 }

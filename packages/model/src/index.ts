@@ -18,7 +18,7 @@ export {
   pluginRegistry,
 }
 
-// class，type
+// class
 export {
   Context,
   Prototype, Plugin,
@@ -26,5 +26,7 @@ export {
   Selection, Timeline
 };
 
+// types
 export * from './types';
+// utils
 export * from './utils';
