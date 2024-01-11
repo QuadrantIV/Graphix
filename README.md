@@ -11,14 +11,14 @@ A lightweight, pluggable, object-oriented programming (OOP) style graphic editor
 ## 🔍 Glossary
 | Term              | Description                                                  |
 | ----------------- | ------------------------------------------------------------ |
-| Skeleton          | Topbar, Toolbar, MainArea, LeftArea, RightArea ![](https://img.alicdn.com/imgextra/i2/O1CN019QcFzr1GdSNRsXzXC_!!6000000000645-2-tps-3584-1854.png)              |
+| Skeleton          | Topbar, Toolbar, MainArea, LeftArea, RightArea ![](./static/skeleton.png) |
 | Plugin            | Typically used to extend the display of various panels in the editor |
 | Prototype         | Description of node prototypes, used to describe the view, attribute setters, default attribute values, etc. for different types of graphic nodes in the editor |
 | Setting          | Used to describe how to configure the properties of graphic nodes    |
 | Rendering Engine  | Used for rendering the graphic canvas in the central area, common 2D/3D rendering libraries: three.js, babylon.js, reactflow, d3, etc. |
 
 ## 📚 Architecture
-![](https://img.alicdn.com/imgextra/i2/O1CN01ZdMroZ1OVgaRB2RNq_!!6000000001711-2-tps-1600-1082.png)
+![](./static/architecture.png)
 
 ## 🎬 Demo
 - [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)

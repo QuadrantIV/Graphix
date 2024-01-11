@@ -11,14 +11,14 @@
 ## 🔍 名词解释
 | 名词         | 说明                                                       |
 | ------------ | ---------------------------------------------------------- |
-| 骨架（Skeleton） | Topbar，Toolbar，MainArea, LeftArea，RightArea ![](https://img.alicdn.com/imgextra/i2/O1CN019QcFzr1GdSNRsXzXC_!!6000000000645-2-tps-3584-1854.png)                |
+| 骨架（Skeleton） | Topbar，Toolbar，MainArea, LeftArea，RightArea ![](./static/skeleton.png) |
 | 插件（Plugin）   | 通常用于扩展编辑器骨架各面板展示                                       |
 | 原型（Prototype）| 节点原型描述，用于描述编辑器不同类型图形节点的 视图、属性设置器、默认属性值等等 |
 | 设置器（Setting）| 用于描述图形节点的属性如何配置                                      |
 | 图形渲染引擎       | 用于中心区域的图形画布渲染，常见 2d/3d 渲染库：three.js, babylon.js，reactflow，d3 等等 |
 
 ## 📚 架构
-![](https://img.alicdn.com/imgextra/i2/O1CN01ZdMroZ1OVgaRB2RNq_!!6000000001711-2-tps-1600-1082.png)
+![](./static/architecture.png)
 
 ## 🎬 Demo
 - [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
