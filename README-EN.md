@@ -1,71 +1,156 @@
 > Translate by chatGPT
-# Graphix
-Graphix is a rapidly constructible and extensible graphical editor development framework, offering a universal model and a set of scaffold views for graphic editor scenarios. It allows for the easy composition of any graphic editor (e.g., flowchart editor, 3D editor, etc.) by extending plugins and components.
+# [Graphix](https://graphix-editor.github.io/graphix-docs/)
+A lightweight, plugin-based graphics editor development library.
 
 [简体中文](./README.md) | English
 
 ## ✨ Features
-- 🧱 Based on the MVC architectural pattern, it provides a universal editor model and scaffold views, framework-independent rendering, enabling you to adapt any graphic rendering engine of your choice.
-- 🧩 Highly extensible, effortlessly combining any graphic editor by extending custom plugins and components.
-- 🔌 Clean and user-friendly API design.
+- 💡 Domain Model: A set of editor domain model descriptions, with support for undo/redo, selection management, and other data services.
+- 🎨 UI Interface: Customizable responsive Skeleton view.
+- 🧩 Plugin-based: Extend editor functionality in a pluggable way.
 
 ## 🔍 Glossary
 | Term              | Description                                                  |
 | ----------------- | ------------------------------------------------------------ |
 | Skeleton          | Topbar, Toolbar, MainArea, LeftArea, RightArea               |
-| Plugin            | Typically used to expand the display of various panels within the editor |
-| Prototype         | Describes the smallest unit component that can be dragged from the LeftArea, including the view of the component, settings panel, etc. |
-| Rendering Engine  | Used for canvas rendering in the central area, common engines include: Dom, AntV X6/G6/G, Three.js, Pixi.js. |
+| Plugin            | Typically used to extend the display of various panels in the editor |
+| Prototype         | Description of node prototypes, used to describe the view, attribute setters, default attribute values, etc. for different types of graphic nodes in the editor |
+| Setting          | Used to describe how to configure the properties of graphic nodes    |
+| Rendering Engine  | Used for rendering the graphic canvas in the central area, common 2D/3D rendering libraries: three.js, babylon.js, reactflow, d3, etc. |
+
+## 📚 Architecture
+![](https://img.alicdn.com/imgextra/i2/O1CN01ZdMroZ1OVgaRB2RNq_!!6000000001711-2-tps-1600-1082.png)
 
 ## 🎬 Demo
-### [BPM Scenario](https://graphix-editor.github.io/Graphix/) (graphix + antv x6)
-[![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)](./examples/bpms/)
-### 3D Scenario
-todo
+- [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
+- example-reactflow
+- example-threejs-3d （wip）
 
 ## 🚀 Getting Started
+Graphix is independent of graphic rendering and can adapt to any required graphic rendering engine based on the scenario. Here is an example with reactflow.
 ```bash
-npm install graphix-engine --save-dev
+npm install graphix-engine reactflow --save-dev
 ```
 
 ```ts
-import { init, pluginRegistry, skeleton } from 'graphix-engine';
-import 'graphix-engine/dist/index.css';
+// flow.tsx
+import React, { useEffect } from 'react';
+import ReactFlow, { useNodesState, useEdgesState, Background, BackgroundVariant, Edge, Node, OnSelectionChangeParams } from 'reactflow';
+import { getContext } from 'graphix-engine';
+import 'reactflow/dist/style.css';
 
-pluginRegistry.register(() => ({
-  name: 'brand',
-  init() {
-    skeleton.add({
-      area: 'topbar',
-      align: 'left',
-      content: <div>这是一个超帅的标题</div>,
+// 从 graphix context 模型数据中获取转换成 reacflow 渲染需要的数据
+const getDataFromContext = () => {
+  let nodes: Node[] = [];
+  let edges: Edge[] = [];
+  for (const n of getContext().getNodes()) {
+    if (n.getType() === 'node') {
+      nodes.push({ id: n.getId(), position: n.getPropData('position'), data: n.getPropsData() });
+    } else {
+      edges.push({ id: n.getId(), source: n.getPropData('source'), target: n.getPropData('target') });
+    }
+  }
+  return { nodes, edges };
+};
+
+// reactflow 画布
+export default function Flow() {
+  const context = getContext();
+  const { nodes: initialNodes, edges: initialEdges } = getDataFromContext();
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // 监听 context 模型数据变化，同步渲染
+  useEffect(() => {
+    const unsubscribe = context.getTimeline().onStateChange((state) => {
+      const { nodes: curNodes, edges: curEdges } = getDataFromContext();
+      setNodes(curNodes);
+      setEdges(curEdges);
     });
-  },
-}));
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+  // selection 选区管理
+  const onSelectionChange = (changes: OnSelectionChangeParams) => {
+    const { nodes } = changes;
+    context.getSelection().setKeys(nodes.map((n) => n.id));
+  };
+
+  return (
+    <div style={{ width: '100%', height: '100%', background: '#fafafa' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onSelectionChange={onSelectionChange}
+      >
+        <Background variant={BackgroundVariant.Dots} />
+      </ReactFlow>
+    </div>
+  );
+}
+```
+```ts
+// index.ts
+import { init, skeleton } from 'graphix-engine';
+import Flow from './flow';
+
+skeleton.add({
+  area: 'mainArea',
+  content: Flow
+});
 
 init({
-  schema: {},
+  schema: {
+    // id
+    id: 'd94bc0d46131c',
+    // 类型
+    type: 'Demo',
+    // 版本
+    version: '1.0.0',
+    // 全局属性
+    props: {},
+    // 节点集合
+    nodes: [
+      {
+        id: '1',
+        type: 'node',
+        props: { label: 'node1', position: { x: 200, y: 200 } },
+      },
+      {
+        id: '2',
+        type: 'node',
+        props: { label: 'node2',  position: { x: 200, y: 300 } },
+      },
+      {
+        id: '3',
+        type: 'edge',
+        props: { label: 'edge1', source: '1', target: '2' },
+      }
+    ],
+  }
 });
 ```
 
-## 📖 Documentation
-todo
-
-## 💻 Local Debugging
+## 💻 Local Development
 
 ```bash
 $ npm install
 $ npm run bootstrap
 
-// Launch the appropriate demo
-$ npm run example-bpms
+// Choose the appropriate demo to start
+$ npm run example-x6-bpms
+$ npm run example-reactflow
 ```
 
 ## 👥 Contributing
 
 We welcome all forms of contribution, whether it's new features, bug fixes, documentation improvements or other types of updates.
 
-Strongly recommend reading [《The Wisdom of Asking Questions》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way), [《How to Ask Questions to the Open Source Community》](https://github.com/seajs/seajs/issues/545) and [《How to Report Bugs Effectively》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html), [《How to Submit Unanswerable Questions to Open Source Projects》](https://zhuanlan.zhihu.com/p/25795393), better questions are easier to get help. (This paragraph refers to [antd](https://github.com/ant-design/ant-design))
+Strongly recommend reading [《The Wisdom of Asking Questions》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way), [《How to Ask Questions to the Open Source Community》](https://github.com/seajs/seajs/issues/545) and [《How to Report Bugs Effectively》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html), [《How to Submit Unanswerable Questions to Open Source Projects》](https://zhuanlan.zhihu.com/p/25795393), better questions are easier to get help. 
 
 Regarding submitting PRs:
 Please set the target merge branch to develop, not main. The develop branch will be merged into the main branch after the official version is released.

@@ -1,4 +1,4 @@
-import { pluginRegistry, workspace, DocumentData, SettingConfig } from 'graphix-model';
+import { pluginRegistry, SettingConfig, Context, Schema } from 'graphix-model';
 import { SkeletonView } from 'graphix-skeleton';
 import { createElement } from 'react';
 import { render as reactRender } from 'react-dom';
@@ -7,9 +7,17 @@ interface InitOptions {
   // 挂载点
   container?: Element;
   // schema 描述
-  schema: DocumentData;
+  schema: Schema;
   // 全局设置
   globalSettings?: SettingConfig[];
+}
+
+let context: Context;
+function setContext(instance: Context) {
+  context = instance;
+}
+export function getContext() {
+  return context;
 }
 
 /**
@@ -25,8 +33,9 @@ export async function init(options: InitOptions) {
     engineContainer.id = 'graphix-engine';
   }
 
-  // init document
-  workspace.initDocument(schema, globalSettings);
+  // init context
+  const context = new Context(schema, globalSettings);
+  setContext(context);
 
   // init plugins
   for(const plugin of pluginRegistry.getRegistry()) {
@@ -42,7 +51,9 @@ export async function init(options: InitOptions) {
  */
 export function render(container: Element) {
   reactRender(
-    createElement(SkeletonView),
+    createElement(SkeletonView, {
+      context: getContext()
+    }),
     container,
   );
 }

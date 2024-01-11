@@ -9,7 +9,8 @@
     "bootstrap": "./scripts/bootstrap.sh",
     "start": "lerna exec --scope graphix-engine -- npm start",
     "build": "lerna run build --stream",
-    "example-bpms": "lerna exec --scope example-bpms -- npm start",
+    "example-x6-bpms": "lerna exec --scope example-x6-bpms -- npm start",
+    "example-reactflow": "lerna exec --scope example-reactflow -- npm start",
     "pub": "lerna publish patch"
   },
   "dependencies": {
@@ -27,5 +28,6 @@
     "typescript": "^4.2.3",
     "lerna": "^4.0.0",
     "yarn": "^1.22.17"
-  }
+  },
+  "repository": "git@github.com:graphix-editor/Graphix.git"
 }
