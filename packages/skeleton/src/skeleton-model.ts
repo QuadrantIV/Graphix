@@ -1,8 +1,5 @@
 import { Area, AreaType, PanelConfig } from "./area";
 
-/**
- * 骨架模型
- */
 export class Skeleton {
   private areas: Area[] = [];
 
