@@ -5,9 +5,9 @@ A lightweight, plugin-based graphics editor development library.
 [简体中文](./README.md) | English
 
 ## ✨ Features
-- 💡 Domain Model: A set of editor domain model descriptions, with support for undo/redo, selection management, and other data services.
-- 🎨 UI Interface: Customizable responsive Skeleton view.
-- 🧩 Plugin-based: Extend editor functionality in a pluggable way.
+- 💡 Domain Model: An OOP-style editor domain model based on TypeScript, accompanied by data services for undo/redo and selection management.
+- 🎨 UI Interface: A deeply customizable responsive Skeleton View.
+- 🧩 Plugin System: Extend editor features through pluggable Plugins.
 
 ## 🔍 Glossary
 | Term              | Description                                                  |
