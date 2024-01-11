@@ -1,6 +1,6 @@
 > Translate by chatGPT
 # [Graphix](https://graphix-editor.github.io/graphix-docs/)
-A lightweight, pluggable, OOP-style graphics editing engine.
+A lightweight, pluggable, object-oriented programming (OOP) style graphic editor development engine.
 
 [简体中文](./README.md) | English
 
