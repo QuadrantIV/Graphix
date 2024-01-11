@@ -11,7 +11,7 @@ A lightweight, pluggable, object-oriented programming (OOP) style graphic editor
 ## 🔍 Glossary
 | Term              | Description                                                  |
 | ----------------- | ------------------------------------------------------------ |
-| Skeleton          | Topbar, Toolbar, MainArea, LeftArea, RightArea               |
+| Skeleton          | Topbar, Toolbar, MainArea, LeftArea, RightArea ![](https://img.alicdn.com/imgextra/i2/O1CN019QcFzr1GdSNRsXzXC_!!6000000000645-2-tps-3584-1854.png)              |
 | Plugin            | Typically used to extend the display of various panels in the editor |
 | Prototype         | Description of node prototypes, used to describe the view, attribute setters, default attribute values, etc. for different types of graphic nodes in the editor |
 | Setting          | Used to describe how to configure the properties of graphic nodes    |
