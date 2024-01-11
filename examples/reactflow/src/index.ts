@@ -1,16 +1,19 @@
-import { init, pluginRegistry } from 'graphix-engine';
-import Graph from './graph-plugin';
+import { init, skeleton } from 'graphix-engine';
+import Flow from './flow';
 
-pluginRegistry.register(Graph);
+skeleton.add({
+  area: 'mainArea',
+  content: Flow
+});
 
 init({
   schema: {
     // id
     id: 'd94bc0d46131c',
-    // 文档类型
-    documentType: 'Demo',
-    // 文档版本
-    documentVersion: '1.0.0',
+    // 类型
+    type: 'Demo',
+    // 版本
+    version: '1.0.0',
     // 全局属性
     props: {},
     // 节点集合

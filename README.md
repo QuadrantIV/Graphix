@@ -1,67 +1,138 @@
-<h1 align="center">Graphix</h1>
+## Graphix
+一个轻量的、插件化图形编辑器开发库。
 
-<div align="center">
-一个可快速构建和扩展图形编辑器的研发框架，提供一套通用的编辑器模型和骨架视图，可以轻松通过扩展 Plugin 和 Prototype（编辑器组件） 来组合生成任意图形编辑器。
-</div>
-<br />
-<div align="center">
-
-  简体中文 | [English](./README-EN.md)
-
-  <div style="display: flex; align-items: center;">
-    如果觉得 Graphix 对您有帮助的话，请帮忙右上角点个 ⭐ Star 和 Fork，您的支持是 Graphix 变得更好最大的动力。
-  </div>
-</div>
+简体中文 | [English](./README-EN.md)
 
 ## ✨ 特性
-
-- 🧱 基于 MVC 架构模式，提供一套通用的编辑器模型和骨架视图，框架与渲染无关，可以适配任意需要的图形渲染引擎。
-- 🧩 极易扩展，通过扩展自定义 Plugin 和 Prototype（编辑器组件）组合出任意图形编辑器。
-- 🔌 简洁易用的 API 设计。
+- 💡 领域模型：一套编辑器领域模型描述，配套撤销恢复，选区管理等数据服务。
+- 🎨 UI 界面：可深度定制的响应式 Skeleton 视图。
+- 🧩 插件化：可插拔的方式扩展编辑器功能。
 
 ## 🔍 名词解释
 | 名词         | 说明                                                       |
 | ------------ | ---------------------------------------------------------- |
 | 骨架（Skeleton） | Topbar，Toolbar，MainArea, LeftArea，RightArea ![](https://img.alicdn.com/imgextra/i2/O1CN019QcFzr1GdSNRsXzXC_!!6000000000645-2-tps-3584-1854.png)                |
 | 插件（Plugin）   | 通常用于扩展编辑器各面板展示                                       |
-| 原型（Prototype）| 用于描述可从 LeftArea 拖拽出使用的最小单元组件，描述包含该组件的 view，设置面板等信息 |
-| 图形渲染引擎       | 用于中心区域的画布渲染，常见 2d/3d 渲染库：three.js, babylon.js, g6/x6，d3 等等 |
+| 原型（Prototype）| 节点原型描述，用于描述编辑器不同类型图形节点的 视图、属性设置器、默认属性值等等 |
+| 设置器（Setting）| 用于描述图形节点的属性如何配置                                      |
+| 图形渲染引擎       | 用于中心区域的图形画布渲染，常见 2d/3d 渲染库：three.js, babylon.js，reactflow，d3 等等 |
+
+## 📚 架构
+![](https://img.alicdn.com/imgextra/i2/O1CN01VgILwb1JfElWbDVRo_!!6000000001055-2-tps-775-516.png)
 
 ## 🎬 Demo
-### [Bpm 场景](https://graphix-editor.github.io/graphix-docs/example-bpms)（graphix + antv x6）
-![](https://img.alicdn.com/imgextra/i4/O1CN01Mi0IFn1jgm6RmetQW_!!6000000004578-1-tps-1792-890.gif)
-
-### 3D 场景
-todo
+- [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
+- example-reactflow
+- example-threejs-3d （wip）
 
 ## 🚀 快速开始
+Graphix 与图形渲染无关，可以根据场景适配任意需要的图形渲染引擎，这里用 reactflow 举 🌰。
 ```bash
-npm install graphix-engine --save-dev
+npm install graphix-engine reactflow --save-dev
 ```
 
 ```ts
-import { init, pluginRegistry, skeleton } from 'graphix-engine';
-import 'graphix-engine/dist/index.css';
+// flow.tsx
+import React, { useEffect } from 'react';
+import ReactFlow, { useNodesState, useEdgesState, Background, BackgroundVariant, Edge, Node, OnSelectionChangeParams } from 'reactflow';
+import { getContext } from 'graphix-engine';
+import 'reactflow/dist/style.css';
 
-pluginRegistry.register(() => ({
-  name: 'brand',
-  init() {
-    skeleton.add({
-      area: 'topbar',
-      align: 'left',
-      content: <div>这是一个超帅的标题</div>,
+// 从 graphix context 模型数据中获取转换成 reacflow 渲染需要的数据
+const getDataFromContext = () => {
+  let nodes: Node[] = [];
+  let edges: Edge[] = [];
+  for (const n of getContext().getNodes()) {
+    if (n.getType() === 'node') {
+      nodes.push({ id: n.getId(), position: n.getPropData('position'), data: n.getPropsData() });
+    } else {
+      edges.push({ id: n.getId(), source: n.getPropData('source'), target: n.getPropData('target') });
+    }
+  }
+  return { nodes, edges };
+};
+
+// reactflow 画布
+export default function Flow() {
+  const context = getContext();
+  const { nodes: initialNodes, edges: initialEdges } = getDataFromContext();
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  // 监听 context 模型数据变化，同步渲染
+  useEffect(() => {
+    const unsubscribe = context.getTimeline().onStateChange((state) => {
+      const { nodes: curNodes, edges: curEdges } = getDataFromContext();
+      setNodes(curNodes);
+      setEdges(curEdges);
     });
-  },
-}));
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+  // selection 选区管理
+  const onSelectionChange = (changes: OnSelectionChangeParams) => {
+    const { nodes } = changes;
+    context.getSelection().setKeys(nodes.map((n) => n.id));
+  };
+
+  return (
+    <div style={{ width: '100%', height: '100%', background: '#fafafa' }}>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onSelectionChange={onSelectionChange}
+      >
+        <Background variant={BackgroundVariant.Dots} />
+      </ReactFlow>
+    </div>
+  );
+}
+```
+```ts
+// index.ts
+import { init, skeleton } from 'graphix-engine';
+import Flow from './flow';
+
+skeleton.add({
+  area: 'mainArea',
+  content: Flow
+});
 
 init({
-  schema: {},
+  schema: {
+    // id
+    id: 'd94bc0d46131c',
+    // 类型
+    type: 'Demo',
+    // 版本
+    version: '1.0.0',
+    // 全局属性
+    props: {},
+    // 节点集合
+    nodes: [
+      {
+        id: '1',
+        type: 'node',
+        props: { label: 'node1', position: { x: 200, y: 200 } },
+      },
+      {
+        id: '2',
+        type: 'node',
+        props: { label: 'node2',  position: { x: 200, y: 300 } },
+      },
+      {
+        id: '3',
+        type: 'edge',
+        props: { label: 'edge1', source: '1', target: '2' },
+      }
+    ],
+  }
 });
 ```
-完整示例代码参考 [example-bpms](https://github.com/graphix-editor/Graphix/tree/main/examples/bpms)
-
-## 📖 文档
-[Graphix docs](https://graphix-editor.github.io/graphix-docs/)
 
 ## 💻 本地调试
 
@@ -70,17 +141,18 @@ $ npm install
 $ npm run bootstrap
 
 // 选择合适的 demo 启动
-$ npm run example-bpms
+$ npm run example-x6-bpms
+$ npm run example-reactflow
 ```
 
-## 👥 贡献
+## 🤝 贡献
 
 欢迎所有形式的贡献，无论是新功能，bug修复，文档改进或是其他类型的更新。
 
-强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。（此段参考 [antd](https://github.com/ant-design/ant-design)）
+强烈推荐阅读 [《提问的智慧》](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way)、[《如何向开源社区提问题》](https://github.com/seajs/seajs/issues/545) 和 [《如何有效地报告 Bug》](http://www.chiark.greenend.org.uk/%7Esgtatham/bugs-cn.html)、[《如何向开源项目提交无法解答的问题》](https://zhuanlan.zhihu.com/p/25795393)，更好的问题更容易获得帮助。
 
 关于提交 PR：
-请将目标合并分支设置为 **develop**，不要指定 **main** 分支，在发布正式版本后，develop 分支将会合入 main 分支。
+请将目标合并分支设置为 **develop**，不要指定 **main** 分支，在发布正式版本后，**develop** 分支将会合入  **main** 分支。
 
 ## 📄 许可证
 

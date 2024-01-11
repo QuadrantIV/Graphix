@@ -1,18 +1,10 @@
 import React, { useEffect } from 'react';
-import ReactFlow, {
-  useNodesState,
-  useEdgesState,
-  Background,
-  BackgroundVariant,
-  Edge,
-  Node,
-  OnSelectionChangeParams,
-} from 'reactflow';
-import { PluginConfig, skeleton, getContext } from 'graphix-engine';
+import ReactFlow, { useNodesState, useEdgesState, Background, BackgroundVariant, Edge, Node, OnSelectionChangeParams } from 'reactflow';
+import { getContext } from 'graphix-engine';
 import 'reactflow/dist/style.css';
 
-// 从 docment 模型数据中获取转换成 reacflow 渲染需要的数据
-const getModelFromDoc = () => {
+// 从 graphix context 模型数据中获取转换成 reacflow 渲染需要的数据
+const getDataFromContext = () => {
   let nodes: Node[] = [];
   let edges: Edge[] = [];
   for (const n of getContext().getNodes()) {
@@ -25,17 +17,17 @@ const getModelFromDoc = () => {
   return { nodes, edges };
 };
 
-// 画布
-function GraphView() {
+// reactflow 画布
+export default function Flow() {
   const context = getContext();
-  const { nodes: initialNodes, edges: initialEdges } = getModelFromDoc();
+  const { nodes: initialNodes, edges: initialEdges } = getDataFromContext();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  // 监听 document 模型数据变化，同步渲染
+  // 监听 context 模型数据变化，同步渲染
   useEffect(() => {
     const unsubscribe = context.getTimeline().onStateChange((state) => {
-      const { nodes: curNodes, edges: curEdges } = getModelFromDoc();
+      const { nodes: curNodes, edges: curEdges } = getDataFromContext();
       setNodes(curNodes);
       setEdges(curEdges);
     });
@@ -63,14 +55,4 @@ function GraphView() {
       </ReactFlow>
     </div>
   );
-}
-
-// graph 插件
-export default function (): PluginConfig {
-  return {
-    name: 'graph-plugin',
-    init() {
-      skeleton.add({ area: 'mainArea', content: GraphView });
-    },
-  };
 }

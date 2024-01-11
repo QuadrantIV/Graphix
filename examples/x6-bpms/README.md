@@ -1,2 +1,1 @@
-## Bpm Demo
-by Graphix and @antv/x6
+## X6 Bpms Demo
