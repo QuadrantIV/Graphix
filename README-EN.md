@@ -1,5 +1,5 @@
 > Translate by chatGPT
-# Graphix
+# [Graphix](https://graphix-editor.github.io/graphix-docs/)
 A lightweight, plugin-based graphics editor development library.
 
 [简体中文](./README.md) | English
@@ -19,7 +19,7 @@ A lightweight, plugin-based graphics editor development library.
 | Rendering Engine  | Used for rendering the graphic canvas in the central area, common 2D/3D rendering libraries: three.js, babylon.js, reactflow, d3, etc. |
 
 ## 📚 Architecture
-![](https://img.alicdn.com/imgextra/i2/O1CN01VgILwb1JfElWbDVRo_!!6000000001055-2-tps-775-516.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN01ZdMroZ1OVgaRB2RNq_!!6000000001711-2-tps-1600-1082.png)
 
 ## 🎬 Demo
 - [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)

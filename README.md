@@ -1,4 +1,4 @@
-## Graphix
+# [Graphix](https://graphix-editor.github.io/graphix-docs/)
 一个轻量的、插件化图形编辑器开发库。
 
 简体中文 | [English](./README-EN.md)
@@ -18,7 +18,7 @@
 | 图形渲染引擎       | 用于中心区域的图形画布渲染，常见 2d/3d 渲染库：three.js, babylon.js，reactflow，d3 等等 |
 
 ## 📚 架构
-![](https://img.alicdn.com/imgextra/i2/O1CN01VgILwb1JfElWbDVRo_!!6000000001055-2-tps-775-516.png)
+![](https://img.alicdn.com/imgextra/i2/O1CN01ZdMroZ1OVgaRB2RNq_!!6000000001711-2-tps-1600-1082.png)
 
 ## 🎬 Demo
 - [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
