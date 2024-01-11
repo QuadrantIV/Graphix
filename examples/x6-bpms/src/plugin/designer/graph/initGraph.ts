@@ -1,4 +1,4 @@
-import { CommonLineView } from './../../../component/shape';
+import { CommonLineView } from '../../../component/shape';
 import { Graph } from '@antv/x6';
 import { Snapline } from '@antv/x6-plugin-snapline';
 import { workspace } from 'graphix-model';
