@@ -213,6 +213,7 @@ $ npm run bootstrap
 
 // Choose the appropriate demo to start
 $ npm run example-x6-bpms
+$ npm run example-three
 $ npm run example-reactflow
 ```
 

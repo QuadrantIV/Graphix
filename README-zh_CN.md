@@ -28,93 +28,145 @@ Graphix 的设计哲学来源于响应式数据驱动框架，确保模型的变
 
 ## 🎬 Demo
 - [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
-- example-reactflow
 - example-threejs-3d （wip）
 
 ## 🚀 快速开始
-Graphix 与图形渲染无关，可以根据场景适配任意需要的图形渲染引擎，这里用 reactflow 举 🌰。
+Graphix 与图形渲染无关，可以根据场景适配任意需要的图形渲染引擎，这里用 [threejs](https://github.com/mrdoob/three.js) 举 🌰。
 ```bash
-npm install graphix-engine reactflow --save-dev
+npm install graphix-engine @types/three three --save-dev
 ```
 
 ```ts
-// flow.tsx
-import React, { useEffect } from 'react';
-import ReactFlow, { useNodesState, useEdgesState, Background, BackgroundVariant, Edge, Node, OnSelectionChangeParams } from 'reactflow';
+// threejs scene.tsx
+import React, { useCallback, useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { DragControls } from 'three/examples/jsm/controls/DragControls.js';
 import { getContext } from 'graphix-engine';
-import 'reactflow/dist/style.css';
 
-// 从 graphix context 模型数据中获取转换成 reacflow 渲染需要的数据
-const getDataFromContext = () => {
-  let nodes: Node[] = [];
-  let edges: Edge[] = [];
-  for (const n of getContext().getNodes()) {
-    if (n.getType() === 'node') {
-      nodes.push({ id: n.getId(), position: n.getPropData('position'), data: n.getPropsData() });
-    } else {
-      edges.push({ id: n.getId(), source: n.getPropData('source'), target: n.getPropData('target') });
-    }
-  }
-  return { nodes, edges };
-};
-
-// reactflow 画布
-export default function Flow() {
+const Scene = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const context = getContext();
-  const { nodes: initialNodes, edges: initialEdges } = getDataFromContext();
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  // 监听 context 模型数据变化，同步渲染
-  useEffect(() => {
-    const unsubscribe = context.getTimeline().onStateChange((state) => {
-      const { nodes: curNodes, edges: curEdges } = getDataFromContext();
-      setNodes(curNodes);
-      setEdges(curEdges);
+  const init = useCallback((container) => {
+    const scene = new THREE.Scene();
+    const axesHelper = new THREE.AxesHelper(20);
+    scene.add(axesHelper);
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    const camera = new THREE.PerspectiveCamera(70, width / height, 0.1, 1000);
+    camera.position.set(50, 50, 50);
+    camera.lookAt(scene.position);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    container.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = true;
+
+    const nodes = context.getNodes();
+    const meshes = nodes.map(n => {
+      const { position, size } = n.getPropsData();
+      const geometry = new THREE.BoxGeometry(size.width, size.height, size.depth);
+      const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.position.set(position.x, position.y, position.z);
+      mesh.userData.gid = n.getId();
+      scene.add(mesh);
+      return mesh;
     });
+
+    const ambientLight = new THREE.AmbientLight(0x404040);
+    scene.add(ambientLight);
+
+    const dragControls = new DragControls(meshes, camera, renderer.domElement);
+    dragControls.addEventListener('dragstart', (event) => controls.enabled = false);
+    dragControls.addEventListener('dragend', (event) => controls.enabled = true);
+
+    const raycaster = new THREE.Raycaster();
+    const onMouseDown = (event: MouseEvent) => {
+      const mouse = new THREE.Vector2();
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
+      let selected;
+      for (const mesh of meshes) {
+        const intersects = raycaster.intersectObject(mesh);
+        if (intersects.length > 0) {
+          selected = intersects[0].object;
+          break;
+        }
+      }
+      onSelect(selected);
+    };
+
+    const onSelect = (object?: THREE.Object3D) => {
+      console.log("Selected object:", object);
+      if (object) {
+        context.getSelection().setKeys([object.userData.gid]);
+      } else {
+        context.getSelection().setKeys([]);
+      }
+    };
+    container.addEventListener('mousedown', onMouseDown);
+    const animate = () => {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    };
+    animate();
     return () => {
-      unsubscribe();
-    }
+      container.removeEventListener('mousedown', onMouseDown);
+    };
   }, []);
 
-  // selection 选区管理
-  const onSelectionChange = (changes: OnSelectionChangeParams) => {
-    const { nodes } = changes;
-    context.getSelection().setKeys(nodes.map((n) => n.id));
-  };
+  useEffect(() => {
+    if (containerRef.current) {
+      const dispose = init(containerRef.current);
+      return dispose;
+    }
+  }, [init]);
 
   return (
-    <div style={{ width: '100%', height: '100%', background: '#fafafa' }}>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onSelectionChange={onSelectionChange}
-      >
-        <Background variant={BackgroundVariant.Dots} />
-      </ReactFlow>
-    </div>
+    <div style={{ width: '100%', height: '100%' }} ref={containerRef} />
   );
-}
+};
+
+export default Scene;
 ```
 ```ts
 // index.ts
-import { init, skeleton } from 'graphix-engine';
-import Flow from './flow';
+import { init, prototypeRegistry, skeleton } from 'graphix-engine';
+import Scene from './scene';
+import InputSetter from './setter/input-setter';
+
+// 配置 mesh 类型节点设置器
+prototypeRegistry.register({
+  type: 'mesh',
+  settings: [
+    {
+      target: 'data',
+      setter: InputSetter
+    }
+  ]
+});
 
 skeleton.add({
   area: 'mainArea',
-  content: Flow
+  content: Scene
 });
 
 init({
   schema: {
-    // id
     id: 'd94bc0d46131c',
-    // 类型
     type: 'Demo',
-    // 版本
     version: '1.0.0',
     // 全局属性
     props: {},
@@ -122,23 +174,36 @@ init({
     nodes: [
       {
         id: '1',
-        type: 'node',
-        props: { label: 'node1', position: { x: 200, y: 200 } },
+        type: 'mesh',
+        props: {
+          position: { x: -20, y: 0, z: 20 },
+          size: { width: 10, height: 10, depth: 10 },
+          data: 1
+        },
       },
       {
         id: '2',
-        type: 'node',
-        props: { label: 'node2',  position: { x: 200, y: 300 } },
+        type: 'mesh',
+        props: {
+          position: { x: 0, y: 0, z: 0 },
+          size: { width: 10, height: 10, depth: 10 },
+          data: 2
+        },
       },
       {
         id: '3',
-        type: 'edge',
-        props: { label: 'edge1', source: '1', target: '2' },
-      }
+        type: 'mesh',
+        props: {
+          position: { x: 20, y: 0, z: -20 },
+          size: { width: 10, height: 10, depth: 10 },
+          data: '3'
+        },
+      },
     ],
   }
 });
 ```
+![](./static/threejs-3d.png)
 
 ## 💻 本地调试
 
@@ -148,6 +213,7 @@ $ npm run bootstrap
 
 // 选择合适的 demo 启动
 $ npm run example-x6-bpms
+$ npm run example-three
 $ npm run example-reactflow
 ```
 
