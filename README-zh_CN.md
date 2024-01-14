@@ -3,6 +3,12 @@
 
 简体中文 | [English](./README.md)
 
+## 🎬 Demo
+- [example-x6-bpms](./examples/x6-bpms/)
+![](./static/x6-bpms.gif)
+- [example-threejs-3d](./examples/threejs-3d)
+![](./static/three-3d.gif)
+
 ## ✨ 特性
 - 💡 领域驱动设计：基于 TypeScript 的 OOP 式编辑器领域模型，提供完整的数据服务支持，包括撤销/重做机制和选区管理等功能。
 - 🎨 用户界面：提供高度可定制的响应式视图框架 Skeleton View，以满足不同的界面需求。
@@ -25,10 +31,6 @@ Graphix 的设计哲学来源于响应式数据驱动框架，确保模型的变
 
 为了支持这种模型驱动的方法，Graphix 模型层提供了一整套完备的 API，能够高效的支持各种复杂的业务逻辑操作。
 ![](./static/architecture.png)
-
-## 🎬 Demo
-- [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
-- example-threejs-3d （wip）
 
 ## 🚀 快速开始
 Graphix 与图形渲染无关，可以根据场景适配任意需要的图形渲染引擎，这里用 [threejs](https://github.com/mrdoob/three.js) 举 🌰。
@@ -203,7 +205,6 @@ init({
   }
 });
 ```
-![](./static/three-3d.gif)
 
 ## 💻 本地调试
 

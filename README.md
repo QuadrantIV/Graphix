@@ -3,6 +3,12 @@ A lightweight, pluggable, object-oriented programming (OOP) style graphic editor
 
 [简体中文](./README-zh_CN.md) | English
 
+## 🎬 Demo
+- [example-x6-bpms](./examples/x6-bpms/)
+![](./static/x6-bpms.gif)
+- [example-threejs-3d](./examples/threejs-3d)
+![](./static/three-3d.gif)
+
 ## ✨ Features
 - 💡 Domain-Driven Design: An OOP-style editor domain model based on TypeScript, providing complete data service support, including undo/redo mechanisms and selection management, among other features.
 - 🎨 User Interface: Offers a highly customizable, responsive view framework called Skeleton View, tailored to meet diverse interface requirements.
@@ -25,10 +31,6 @@ The design philosophy of Graphix is rooted in a reactive data-driven framework t
 
 To support this model-driven approach, the Graphix model layer provides a comprehensive set of APIs that efficiently support a wide range of complex business logic operations.
 ![](./static/architecture.png)
-
-## 🎬 Demo
-- [example-x6-bpms](https://graphix-editor.github.io/graphix-docs/example-bpms)
-- example-threejs-3d
 
 ## 🚀 Getting Started
 Graphix is independent of graphic rendering and can adapt to any required graphic rendering engine based on the scenario. Here is an example with [threejs](https://github.com/mrdoob/three.js).
@@ -203,7 +205,6 @@ init({
   }
 });
 ```
-![](./static/three-3d.gif)
 
 ## 💻 Local Development
 
