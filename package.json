@@ -11,6 +11,7 @@
     "build": "lerna run build --stream",
     "example-x6-bpms": "lerna exec --scope example-x6-bpms -- npm start",
     "example-reactflow": "lerna exec --scope example-reactflow -- npm start",
+    "example-three": "lerna exec --scope example-three -- npm start",
     "pub": "lerna publish patch"
   },
   "dependencies": {
