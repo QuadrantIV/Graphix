@@ -1,5 +1,5 @@
 # Graphix
-A lightweight, pluggable, object-oriented programming (OOP) style graphic editor development engine.
+A lightweight, pluggable, object-oriented programming (OOP) style graphic editor development engine, designed to address the foundational architectural design issues in graphics editor development.
 
 [简体中文](./README-zh_CN.md) | English
 
