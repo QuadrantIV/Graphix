@@ -203,7 +203,7 @@ init({
   }
 });
 ```
-![](./static/threejs-3d.png)
+![](./static/three-3d.gif)
 
 ## 💻 本地调试
 
