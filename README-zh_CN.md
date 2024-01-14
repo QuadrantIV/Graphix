@@ -1,4 +1,4 @@
-# [Graphix](https://graphix-editor.github.io/graphix-docs/)
+# Graphix
 一个轻量级、可插拔、OOP 式图形编辑器开发引擎。
 
 简体中文 | [English](./README.md)

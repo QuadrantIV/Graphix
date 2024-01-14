@@ -1,4 +1,4 @@
-# [Graphix](https://graphix-editor.github.io/graphix-docs/)
+# Graphix
 A lightweight, pluggable, object-oriented programming (OOP) style graphic editor development engine.
 
 [简体中文](./README-zh_CN.md) | English
