@@ -19,25 +19,24 @@
 | ------------ | ---------------------------------------------------------- |
 | 骨架（Skeleton） | Topbar，Toolbar，MainArea, LeftArea，RightArea ![](./static/skeleton.png) |
 | 插件（Plugin）   | 通常用于扩展编辑器骨架各面板展示                                       |
-| 原型（Prototype）| 节点原型描述，用于描述编辑器不同类型图形节点的 视图、属性设置器、默认属性值等等 |
+| 原型（Prototype）| 节点原型配置，用于描述编辑器不同类型图形节点的 视图、属性设置器、默认属性值等等 |
 | 设置器（Setting）| 用于描述图形节点的属性如何配置                                      |
-| 图形渲染引擎       | 用于中心区域的图形画布渲染，常见 2d/3d 渲染库：three.js, babylon.js，reactflow，d3 等等 |
+| 图形渲染引擎       | 用于中心区域的图形画布渲染，常见 2d/3d 渲染库：Three.js, Babylon.js，Antv 系列，D3 等等 |
 
 ## 📚 设计
 ```ts
 GraphView = GraphRender(GraphixModel)
 ```
-Graphix 的设计哲学来源于响应式数据驱动框架，确保模型的变化能够直接引导图形视图的渲染过程。简而言之，图形视图（GraphView）是由图形渲染器（GraphRender）根据 Graphix 模型的状态动态生成的。这种模型与渲染之间的绑定一旦确立，图形交互的逻辑就变得纯粹而高效——无需再涉足繁杂的渲染逻辑，只需专注于模型本身的操作。例如，要更新节点名称，开发者仅需调整 Graphix 节点的属性值即可。在这个协作环境中，即便是不熟悉图形渲染的开发者也能轻松参与。
+Graphix 的设计来源于响应式数据驱动框架，确保模型的变化能够直接引导图形视图的渲染过程。简而言之，图形视图（GraphView）是由图形渲染器（GraphRender）根据 Graphix 模型的状态动态生成的。这种模型与渲染之间的绑定一旦确立，图形交互的逻辑就变得纯粹而高效——无需再涉足繁杂的渲染逻辑，只需专注于模型本身的操作。例如，要更新节点名称，开发者仅需调整 Graphix 节点的属性值即可。在这个协作环境中，即便是不熟悉图形渲染的开发者也能轻松参与。
 
-为了支持这种模型驱动的方法，Graphix 模型层提供了一整套完备的 API，能够高效的支持各种复杂的业务逻辑操作。
+其核心理念在于**把复杂的图形渲染逻辑问题转化成简单的模型数据结构问题**，从而围绕模型提供一套编辑器的基础架构设计方法。
 ![](./static/architecture.png)
 
 ## 🚀 快速开始
-Graphix 与图形渲染无关，可以根据场景适配任意需要的图形渲染引擎，这里用 [threejs](https://github.com/mrdoob/three.js) 举 🌰。
+Graphix 与图形渲染无关，可以根据场景使用任意需要的图形渲染引擎，这里用 [threejs](https://github.com/mrdoob/three.js) 举 🌰。
 ```bash
 npm install graphix-engine @types/three three --save-dev
 ```
-
 ```ts
 // threejs scene.tsx
 import React, { useCallback, useEffect, useRef } from 'react';
