@@ -11,7 +11,7 @@ interface Props {
   context: Context;
 }
 
-export class SkeletonView extends React.PureComponent<Props> {
+export class SkeletonView extends React.Component<Props> {
   render() {
     const { context } = this.props;
     return (
