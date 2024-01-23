@@ -98,6 +98,9 @@ Graphix 的默认 Schema 如下，可以根据业务场景转成需要的结构�
 
 ## 🚀 快速开始
 ### Startup
+```bash
+npm install graphix-engine --save-dev
+```
 Graphix 初始化启动的逻辑只有三步：
 1. 把用于初始化的 json schema parse 成 Graphix 模型内存实例
 2. 执行注册插件 init hook

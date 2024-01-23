@@ -97,6 +97,9 @@ The default Schema of Graphix is as follows, which can be converted into the req
 
 ## 🚀 Getting Started
 ### Startup
+```bash
+npm install graphix-engine --save-dev
+```
 The initialization startup logic of Graphix only has three steps:
 
 1. Parse the JSON schema used for initialization into an in-memory Graphix model instance.
