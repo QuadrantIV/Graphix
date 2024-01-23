@@ -32,7 +32,102 @@ Graphix 的设计来源于响应式数据驱动框架，确保模型的变化能
 其核心理念在于**把复杂的图形渲染逻辑问题转化成简单的模型数据结构问题**，从而围绕模型提供一套编辑器的基础架构设计方法。
 ![](./static/architecture.png)
 
+### 编辑器模型
+Graphix 的编辑器模型是基于节点（node-based）构建的，无论是 2d 场景下的 节点/边，还是 3d 下的 Mesh 之类的 Object3D，在 Graphix 中统一都被抽象描述成一个节点，Graphix 节点的数据结构描述本身也很简单：Id，类型以及对应节点属性 Props 构成一个节点。
+```ts
+interface NodeData {
+  id?: string;
+  type: string;
+  props?: PropsData;
+  [key: string]: any;
+}
+```
+当 node-based 这个设计基调确定之后，Graphix 模型层便可以提供很多基于节点的能力：
+1. Timeline 可以提供基础整体模型变化的撤销恢复服务。
+2. Selection 可以提供节点选中的管理服务。
+3. Prototype（原型）可以用来描述不同类型图形节点视图表示、属性配置界面以及默认属性值等。例如，在 Bpms 流程设计器中，UserTask（人工审批）节点作为一个特定类型，其原型不仅决定了节点的视觉呈现，还指定了用户选中该节点时属性设置面板的配置项以及该节点类型的默认属性集。这些描述性信息是高度通用的，为不同类型的图形节点提供了一个统一的定义框架。
+4. ...等等
+
+### Skeleton UI
+大多数编辑器的整体 UI 设计基本相同，都会有对应的 Topbar 顶部栏，Toolbar 工具栏，MainArea 中心画布 ，RightArea 右侧设置面板等等，Graphix Skeleton 视图是响应式可扩展的，可以通过 skeleton 单例添加需要扩展的面板。
+```ts
+import { skeleton } from 'graphix-engine';
+
+skeleton.add({
+  area: 'topbar',
+  content: <div>一个很帅的标题</div>
+});
+```
+
+### Plugin 插件
+插件的设计非常轻量化，插件的作用更多的是提供一种更好的组织代码的方式。当基于 Graphix 开发的编辑器产品本身需要面向 三方 提供扩展能力，那么使用插件去封装会很实用。
+```ts
+import { pluginRegistry } from 'graphix-engine';
+
+pluginRegistry.register(() => {
+  return {
+    name: 'haha-plugin',
+    init() {
+      console.log('haha')
+    }
+  }
+});
+```
+
+### JSON Schema
+图形编辑器的本质就是通过可视化的方式编辑 JSON Schema
+Graphix 的默认 Schema 如下，可以根据业务场景转成需要的结构。
+```json
+{
+  "id": "d94bc0d46131c",
+  "type": "Demo",
+  "version": "1.0.0",
+  "props": {},
+  "nodes": [
+    {
+      "id": "1",
+      "type": "mesh",
+      "props": {
+        "position": { "x": -20, "y": 0, "z": 20 },
+        "size": { "width": 10, "height": 10, "depth": 10 }
+      }
+    }
+  ]
+}
+```
+
 ## 🚀 快速开始
+### Startup
+Graphix 初始化启动的逻辑只有三步：
+1. 把用于初始化的 json schema parse 成 Graphix 模型内存实例
+2. 执行注册插件 init hook
+3. 渲染 skeleton UI
+```ts
+import { init } from 'graphix-engine';
+
+init({
+  schema: {
+    id: 'd94bc0d46131c',
+    type: 'Demo',
+    version: '1.0.0',
+    // 全局属性
+    props: {},
+    // 节点集合
+    nodes: [
+      {
+        id: '1',
+        type: 'mesh',
+        props: {
+          position: { x: -20, y: 0, z: 20 },
+          size: { width: 10, height: 10, depth: 10 },
+        },
+      },
+    ],
+  }
+});
+```
+
+### Example
 Graphix 与图形渲染无关，可以根据场景使用任意需要的图形渲染引擎，这里用 [threejs](https://github.com/mrdoob/three.js) 举 🌰。
 ```bash
 npm install graphix-engine @types/three three --save-dev
