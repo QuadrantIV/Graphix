@@ -10,6 +10,7 @@ export default function initGraph(container: HTMLDivElement) {
   graph = new Graph({
     container,
     autoResize: true,
+    grid: 1,
     background: {
       color: '#fafafa',
       image: 'https://img.alicdn.com/imgextra/i3/O1CN01LVUi4y1e6WRzwnhIh_!!6000000003822-55-tps-22-22.svg',
