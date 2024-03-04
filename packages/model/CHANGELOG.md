@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.15](https://github.com/foginn/Graphix/compare/v1.0.14...v1.0.15) (2024-03-04)
+
+
+### Bug Fixes
+
+* context addNode return node ([83f194b](https://github.com/foginn/Graphix/commit/83f194ba386b722de9cc7341f4e3db463ed1a2ab))
+
+
+
+
+
 ## [1.0.14](https://github.com/foginn/Graphix/compare/v1.0.13...v1.0.14) (2024-01-22)
 
 **Note:** Version bump only for package graphix-model

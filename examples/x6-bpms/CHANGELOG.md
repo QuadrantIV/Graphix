@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.15](https://github.com/foginn/Graphix/compare/v1.0.14...v1.0.15) (2024-03-04)
+
+
+### Features
+
+* x6 flow demo 优化拖拽流畅度 ([9dd9fab](https://github.com/foginn/Graphix/commit/9dd9fabd2d8e6bdeb33dcc650874732befa5577d))
+
+
+
+
+
 ## [1.0.11](https://github.com/foginn/Graphix/compare/v1.0.10...v1.0.11) (2024-01-11)
 
 **Note:** Version bump only for package example-x6-bpms
