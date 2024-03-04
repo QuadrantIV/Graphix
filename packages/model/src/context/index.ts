@@ -75,6 +75,7 @@ export default class Context {
     this.nodes.push(node);
     this.nodesMap[node.getId()] = node;
     this.getTimeline().log(`Add node ${node.getType()} #${node.getId()}`);
+    return node;
   }
 
   removeNode(node: Node | string) {
